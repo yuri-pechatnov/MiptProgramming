@@ -158,17 +158,17 @@ class PreflowPushFlow : public FlowSolver {
         }
     }
   public:
-    virtual int64_t calculateFlow(VecUVC &uvc, int sourceNum, int sinkNum) {
-        return calculateFlowWithHeuristics(uvc, sourceNum, sinkNum);
+    virtual int64_t calculateFlow(VectorInputOutputEdgeStructure &edges, int sourceNum, int sinkNum) {
+        return calculateFlowWithHeuristics(edges, sourceNum, sinkNum);
     }
 
-    int64_t calculateFlowWithHeuristics(VecUVC &uvc, int sourceNum, int sinkNum) {
+    int64_t calculateFlowWithHeuristics(VectorInputOutputEdgeStructure &edges, int sourceNum, int sinkNum) {
         source = graph.vertexByNum(sourceNum);
         sink = graph.vertexByNum(sinkNum);
-        for (int i = 0; i < (int)uvc.size(); i++) {
-            Vertex *u = graph.vertexByNum(uvc[i].u), *v = graph.vertexByNum(uvc[i].v);
+        for (int i = 0; i < (int)edges.size(); i++) {
+            Vertex *u = graph.vertexByNum(edges[i].u), *v = graph.vertexByNum(edges[i].v);
             std::pair <Edge*, Edge*> edgePair = graph.newEdgeWithRev(u, v,
-                    new EdgeProperty(i * 2, uvc[i].c), new EdgeProperty(i * 2 + 1, 0));
+                    new EdgeProperty(i * 2, edges[i].capacity), new EdgeProperty(i * 2 + 1, 0));
             u->addEdge(edgePair.first);
             v->addEdge(edgePair.second);
         }
@@ -212,7 +212,7 @@ class PreflowPushFlow : public FlowSolver {
                 Edge *e = *eit;
                 EdgeProperty *ep = e->getProperty();
                 if (ep->getNum() % 2 == 0)
-                    uvc[ep->getNum() / 2].f = ep->currentFlow();
+                    edges[ep->getNum() / 2].flow = ep->currentFlow();
             }
         }
         return flowval;

@@ -98,27 +98,26 @@ class DinicFlow : public FlowSolver {
         while (int delta = tryPushFixed(source, m, INT_MAX))
             flowval += delta;
     }
-    void writeEdgesFlow(VecUVC &uvc) {
+    void writeEdgesFlow(VectorInputOutputEdgeStructure &edges) {
         for (DGraph::VertexIterator it = graph.vertexesBegin(); it != graph.vertexesEnd(); it++) {
             Vertex *v = *it;
             for (DGraph::Vertex::EdgeIterator eit = v->edgesBegin(); eit != v->edgesEnd(); eit++) {
                 Edge *e = *eit;
                 EdgeProperty *ep = e->getProperty();
                 if (ep->getNum() % 2 == 0)
-                    uvc[ep->getNum() / 2].f = ep->currentFlow();
+                    edges[ep->getNum() / 2].flow = ep->currentFlow();
             }
         }
     }
   public:
-    virtual int64_t calculateFlow(VecUVC &uvc, int sourceNum, int sinkNum) {
+    virtual int64_t calculateFlow(VectorInputOutputEdgeStructure &edges, int sourceNum, int sinkNum) {
         int64_t flowval;
         source = graph.vertexByNum(sourceNum);
         sink = graph.vertexByNum(sinkNum);
-        for (int i = 0; i < (int)uvc.size(); i++) {
-            uvc[i].f = 0;
-            Vertex *u = graph.vertexByNum(uvc[i].u), *v = graph.vertexByNum(uvc[i].v);
+        for (int i = 0; i < (int)edges.size(); i++) {
+            Vertex *u = graph.vertexByNum(edges[i].u), *v = graph.vertexByNum(edges[i].v);
             std::pair <Edge*, Edge*> edgePair = graph.newEdgeWithRev(u, v,
-                    new EdgeProperty(i * 2, uvc[i].c), new EdgeProperty(i * 2 + 1, 0));
+                    new EdgeProperty(i * 2, edges[i].capacity), new EdgeProperty(i * 2 + 1, 0));
             u->addEdge(edgePair.first);
             v->addEdge(edgePair.second);
         }
@@ -128,7 +127,7 @@ class DinicFlow : public FlowSolver {
                 break;
             pushWhilePossible(flowval);
         }
-        writeEdgesFlow(uvc);
+        writeEdgesFlow(edges);
         return flowval;
     }
     DinicFlow(int n) {
@@ -139,17 +138,16 @@ class DinicFlow : public FlowSolver {
 
 class DinicScalingFlow : public DinicFlow {
   public:
-    virtual int64_t calculateFlow(VecUVC &uvc, int sourceNum, int sinkNum) {
+    virtual int64_t calculateFlow(VectorInputOutputEdgeStructure &edges, int sourceNum, int sinkNum) {
         int64_t flowval;
         source = graph.vertexByNum(sourceNum);
         sink = graph.vertexByNum(sinkNum);
         int maximalEdgeCapacity = 0;
-        for (int i = 0; i < (int)uvc.size(); i++) {
-            uvc[i].f = 0;
-            upto(maximalEdgeCapacity, uvc[i].c);
-            Vertex *u = graph.vertexByNum(uvc[i].u), *v = graph.vertexByNum(uvc[i].v);
+        for (int i = 0; i < (int)edges.size(); i++) {
+            upto(maximalEdgeCapacity, edges[i].capacity);
+            Vertex *u = graph.vertexByNum(edges[i].u), *v = graph.vertexByNum(edges[i].v);
             std::pair <Edge*, Edge*> edgePair = graph.newEdgeWithRev(u, v,
-                    new EdgeProperty(i * 2, uvc[i].c), new EdgeProperty(i * 2 + 1, 0));
+                    new EdgeProperty(i * 2, edges[i].capacity), new EdgeProperty(i * 2 + 1, 0));
             u->addEdge(edgePair.first);
             v->addEdge(edgePair.second);
         }
@@ -161,7 +159,7 @@ class DinicScalingFlow : public DinicFlow {
                 pushFixedWhilePossible(m, flowval);
             }
         }
-        writeEdgesFlow(uvc);
+        writeEdgesFlow(edges);
         return flowval;
     }
     DinicScalingFlow(int n): DinicFlow(n) {}

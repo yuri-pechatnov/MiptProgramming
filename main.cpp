@@ -12,13 +12,13 @@ int main()
 {
     freopen("input.txt", "rt", stdin);
     int N, M;
-    VecUVC uvc;
+    VectorInputOutputEdgeStructure inputOutputEdgesStructuresItsVeryLongVariableNameJustForFunAndBecauseMisunderstandingAPurposeOfThis;
     cin >> N >> M;
-    uvc.resize(M);
+    inputOutputEdgesStructuresItsVeryLongVariableNameJustForFunAndBecauseMisunderstandingAPurposeOfThis.resize(M);
     for (int i = 0; i < M; i++) {
         int u, v, c;
         cin >> u >> v >> c;
-        uvc[i] = UVC(u - 1, v - 1, c);
+        inputOutputEdgesStructuresItsVeryLongVariableNameJustForFunAndBecauseMisunderstandingAPurposeOfThis[i] = InputOutputEdgeStructure(u - 1, v - 1, c);
     }
     int64_t flowval;
     FlowSolver *flow = NULL;
@@ -26,9 +26,9 @@ int main()
         flow = new DinicScalingFlow(N);
     else
         flow = new PreflowPushFlow(N);
-    flowval = flow->calculateFlow(uvc, 0, N - 1);
+    flowval = flow->calculateFlow(inputOutputEdgesStructuresItsVeryLongVariableNameJustForFunAndBecauseMisunderstandingAPurposeOfThis, 0, N - 1);
     cout << flowval << endl;
     for (int i = 0; i < M; i++)
-        cout << uvc[i].f << endl;
+        cout << inputOutputEdgesStructuresItsVeryLongVariableNameJustForFunAndBecauseMisunderstandingAPurposeOfThis[i].flow << endl;
     return 0;
 }
