@@ -22,7 +22,7 @@ namespace DinicSupportClasses {
     EdgeProperty::EdgeProperty() {}
     EdgeProperty::EdgeProperty(int n, int cap): num(n), initCapacity(cap), flow(0) {}
 
-    bool ResidualCapacityGreaterThen::operator()(DGraph::Edge* e) { return e->getProperty()->residualCapacity() >= x; }
+    bool ResidualCapacityGreaterThen::operator()(DinicGraph::Edge* e) { return e->getProperty()->residualCapacity() >= x; }
     ResidualCapacityGreaterThen::ResidualCapacityGreaterThen(int x_): x(x_) {}
 
 };
@@ -66,15 +66,15 @@ void DinicFlow::pushWhilePossible(int64_t &flowval) {
     pushFixedWhilePossible(1, flowval);
 }
 void DinicFlow::pushFixedWhilePossible(int m, int64_t &flowval) {
-    for (DGraph::VertexIterator it = graph.vertexesBegin(); it != graph.vertexesEnd(); it++)
+    for (DinicGraph::VertexIterator it = graph.vertexesBegin(); it != graph.vertexesEnd(); it++)
         (*it)->getProperty()->pointerOnFirstNonErasedEdge = (*it)->edgesBegin();
     while (int delta = tryPushFixed(source, m, INT_MAX))
         flowval += delta;
 }
 void DinicFlow::writeEdgesFlow(VectorInputOutputEdgeStructure &edges) {
-    for (DGraph::VertexIterator it = graph.vertexesBegin(); it != graph.vertexesEnd(); it++) {
+    for (DinicGraph::VertexIterator it = graph.vertexesBegin(); it != graph.vertexesEnd(); it++) {
         Vertex *v = *it;
-        for (DGraph::Vertex::EdgeIterator eit = v->edgesBegin(); eit != v->edgesEnd(); eit++) {
+        for (DinicGraph::Vertex::EdgeIterator eit = v->edgesBegin(); eit != v->edgesEnd(); eit++) {
             Edge *e = *eit;
             EdgeProperty *ep = e->getProperty();
             if (ep->getNum() % 2 == 0)

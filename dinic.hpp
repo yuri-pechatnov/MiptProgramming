@@ -10,12 +10,12 @@ namespace DinicSupportClasses {
     class VertexProperty;
     class EdgeProperty;
 
-    typedef Graph<VertexProperty, EdgeProperty> DGraph;
+    typedef Graph<VertexProperty, EdgeProperty> DinicGraph;
 
     class VertexProperty {
       public:
         int distance;
-        DGraph::Vertex::EdgeIterator pointerOnFirstNonErasedEdge;
+        DinicGraph::Vertex::EdgeIterator pointerOnFirstNonErasedEdge;
     };
 
     class EdgeProperty {
@@ -32,20 +32,20 @@ namespace DinicSupportClasses {
     class ResidualCapacityGreaterThen {
         int x;
       public:
-        bool operator()(DGraph::Edge* e);
+        bool operator()(DinicGraph::Edge* e);
         ResidualCapacityGreaterThen(int x_);
     };
 };
 
 class DinicFlow : public FlowSolver {
   protected:
-    typedef DinicSupportClasses::DGraph DGraph;
+    typedef DinicSupportClasses::DinicGraph DinicGraph;
     typedef DinicSupportClasses::VertexProperty VertexProperty;
     typedef DinicSupportClasses::EdgeProperty EdgeProperty;
-    typedef DGraph::Vertex Vertex;
-    typedef DGraph::Edge Edge;
+    typedef DinicGraph::Vertex Vertex;
+    typedef DinicGraph::Edge Edge;
 
-    DGraph graph;
+    DinicGraph graph;
     Vertex *source, *sink;
 
     bool bfsFixed(int m);

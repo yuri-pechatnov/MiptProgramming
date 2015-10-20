@@ -26,7 +26,7 @@ namespace PreflowPushSupportClasses {
     EdgeProperty::EdgeProperty() {}
     EdgeProperty::EdgeProperty(int n, int cap): num(n), initCapacity(cap), flow(0) {}
 
-    void DischargingQueueAssistant::prepare(DGraph::Vertex *now) {
+    void DischargingQueueAssistant::prepare(PreflowPushGraph::Vertex *now) {
         lastExcess = now->getProperty()->excess;
         last = now;
     }
@@ -35,7 +35,7 @@ namespace PreflowPushSupportClasses {
             q.push(last);
         }
     }
-    DischargingQueueAssistant::DischargingQueueAssistant(std::queue <DGraph::Vertex*> &q_): q(q_), last(NULL), lastExcess(-1) {}
+    DischargingQueueAssistant::DischargingQueueAssistant(std::queue <PreflowPushGraph::Vertex*> &q_): q(q_), last(NULL), lastExcess(-1) {}
 
 };
 
@@ -67,7 +67,7 @@ void PreflowPushFlow::relabel(Vertex *v) {
 
 void PreflowPushFlow::gapLineHeuristic(int oldHeight) {
     if (heightCount[oldHeight] == 0 && oldHeight < maxHeight) {
-        for (DGraph::VertexIterator it = graph.vertexesBegin(); it != graph.vertexesEnd(); it++) {
+        for (PreflowPushGraph::VertexIterator it = graph.vertexesBegin(); it != graph.vertexesEnd(); it++) {
             Vertex *u = *it;
             if (u == source || u == sink)
                 continue;
@@ -107,7 +107,7 @@ bool PreflowPushFlow::reverseEdgeIsNotSaturated(Edge *e) {
 
 void PreflowPushFlow::globalRelabel() {
     graph.bfs(sink, reverseEdgeIsNotSaturated);
-    for (DGraph::VertexIterator vIterator = graph.vertexesBegin(); vIterator != graph.vertexesEnd(); vIterator++) {
+    for (PreflowPushGraph::VertexIterator vIterator = graph.vertexesBegin(); vIterator != graph.vertexesEnd(); vIterator++) {
         Vertex *v = *vIterator;
         if (v == sink || v == source)
             continue;
@@ -136,7 +136,7 @@ int64_t PreflowPushFlow::calculateFlowWithHeuristics(VectorInputOutputEdgeStruct
         u->addEdge(edgePair.first);
         v->addEdge(edgePair.second);
     }
-    for (DGraph::VertexIterator it = graph.vertexesBegin(); it != graph.vertexesEnd(); it++) {
+    for (PreflowPushGraph::VertexIterator it = graph.vertexesBegin(); it != graph.vertexesEnd(); it++) {
         Vertex *v = *it;
         v->getProperty()->clear(v->edgesBegin());
     }
@@ -170,9 +170,9 @@ int64_t PreflowPushFlow::calculateFlowWithHeuristics(VectorInputOutputEdgeStruct
     int64_t flowval = 0;
     for (Vertex::EdgeIterator it = source->edgesBegin(); it != source->edgesEnd(); it++)
         flowval += (*it)->getProperty()->currentFlow();
-    for (DGraph::VertexIterator it = graph.vertexesBegin(); it != graph.vertexesEnd(); it++) {
+    for (PreflowPushGraph::VertexIterator it = graph.vertexesBegin(); it != graph.vertexesEnd(); it++) {
         Vertex *v = *it;
-        for (DGraph::Vertex::EdgeIterator eit = v->edgesBegin(); eit != v->edgesEnd(); eit++) {
+        for (PreflowPushGraph::Vertex::EdgeIterator eit = v->edgesBegin(); eit != v->edgesEnd(); eit++) {
             Edge *e = *eit;
             EdgeProperty *ep = e->getProperty();
             if (ep->getNum() % 2 == 0)

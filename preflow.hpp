@@ -10,14 +10,14 @@
 namespace PreflowPushSupportClasses {
     class VertexProperty;
     class EdgeProperty;
-    typedef Graph<VertexProperty, EdgeProperty> DGraph;
+    typedef Graph<VertexProperty, EdgeProperty> PreflowPushGraph;
 
     class VertexProperty {
       public:
         int height;
         int distance;
         int64_t excess;
-        DGraph::Vertex::EdgeIterator iteratorOnFirstNonPushedEdge;
+        PreflowPushGraph::Vertex::EdgeIterator iteratorOnFirstNonPushedEdge;
 
         void clear(const Graph <VertexProperty, EdgeProperty>::Vertex::EdgeIterator &iteratorToBegin);
     };
@@ -33,26 +33,26 @@ namespace PreflowPushSupportClasses {
     };
 
     class DischargingQueueAssistant {
-        std::queue <DGraph::Vertex*> &q;
-        DGraph::Vertex *last;
+        std::queue <PreflowPushGraph::Vertex*> &q;
+        PreflowPushGraph::Vertex *last;
         int lastExcess;
       public:
-        void prepare(DGraph::Vertex *now);
+        void prepare(PreflowPushGraph::Vertex *now);
         void push();
-        DischargingQueueAssistant(std::queue <DGraph::Vertex*> &q);
+        DischargingQueueAssistant(std::queue <PreflowPushGraph::Vertex*> &q);
     };
 };
 
 class PreflowPushFlow : public FlowSolver {
   protected:
-    typedef PreflowPushSupportClasses::DGraph DGraph;
+    typedef PreflowPushSupportClasses::PreflowPushGraph PreflowPushGraph;
     typedef PreflowPushSupportClasses::VertexProperty VertexProperty;
     typedef PreflowPushSupportClasses::EdgeProperty EdgeProperty;
     typedef PreflowPushSupportClasses::DischargingQueueAssistant DischargingQueueAssistant;
-    typedef DGraph::Vertex Vertex;
-    typedef DGraph::Edge Edge;
+    typedef PreflowPushGraph::Vertex Vertex;
+    typedef PreflowPushGraph::Edge Edge;
 
-    DGraph graph;
+    PreflowPushGraph graph;
     Vertex *source, *sink;
     std::vector <int> heightCount; // count of vertexes with given height
     int maxHeight; // maximal height of non-start vertex
