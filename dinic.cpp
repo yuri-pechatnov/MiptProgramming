@@ -11,7 +11,8 @@ namespace DinicSupportClasses {
         return num;
     }
     int EdgeProperty::residualCapacity() {
-        assert(initCapacity - flow >= 0); return initCapacity - flow;
+        assert(initCapacity - flow >= 0);
+        return initCapacity - flow;
     }
     int EdgeProperty::currentFlow() {
         return flow;
@@ -20,9 +21,12 @@ namespace DinicSupportClasses {
         flow += delta;
     }
     EdgeProperty::EdgeProperty() {}
-    EdgeProperty::EdgeProperty(int n, int cap): num(n), initCapacity(cap), flow(0) {}
+    EdgeProperty::EdgeProperty(int n, int cap):
+        num(n), initCapacity(cap), flow(0) {}
 
-    bool ResidualCapacityGreaterThen::operator()(DinicGraph::Edge* e) { return e->getProperty()->residualCapacity() >= x; }
+    bool ResidualCapacityGreaterThen::operator()(DinicGraph::Edge* e) {
+        return e->getProperty()->residualCapacity() >= x;
+    }
     ResidualCapacityGreaterThen::ResidualCapacityGreaterThen(int x_): x(x_) {}
 
 };
@@ -42,13 +46,15 @@ int DinicFlow::tryPushFixed(Vertex *v, int m, int flow) {
         return 0;
     if (v == sink)
         return flow;
-    for (Vertex::EdgeIterator &it = v->getProperty()->pointerOnFirstNonErasedEdge;
+    for (Vertex::EdgeIterator &it = v->getProperty()
+                                        ->pointerOnFirstNonErasedEdge;
                 it != v->edgesEnd(); it++) {
         Edge *e = (*it);
         Vertex *u = e->to();
         if (u->getProperty()->distance != v->getProperty()->distance + 1)
             continue;
-        int pushed = tryPush(u, std::min(flow, e->getProperty()->residualCapacity()));
+        int pushed = tryPush(u, std::min(flow, e->getProperty()
+                                                    ->residualCapacity()));
         if (pushed) {
             e->getProperty()->addFlow(pushed);
             e->reverseEdge()->getProperty()->addFlow(-pushed);
@@ -66,15 +72,19 @@ void DinicFlow::pushWhilePossible(int64_t &flowval) {
     pushFixedWhilePossible(1, flowval);
 }
 void DinicFlow::pushFixedWhilePossible(int m, int64_t &flowval) {
-    for (DinicGraph::VertexIterator it = graph.vertexesBegin(); it != graph.vertexesEnd(); it++)
-        (*it)->getProperty()->pointerOnFirstNonErasedEdge = (*it)->edgesBegin();
+    for (DinicGraph::VertexIterator it = graph.vertexesBegin();
+                it != graph.vertexesEnd(); it++)
+        (*it)->getProperty()->pointerOnFirstNonErasedEdge =
+                                            (*it)->edgesBegin();
     while (int delta = tryPushFixed(source, m, INT_MAX))
         flowval += delta;
 }
 void DinicFlow::writeEdgesFlow(VectorInputOutputEdgeStructure &edges) {
-    for (DinicGraph::VertexIterator it = graph.vertexesBegin(); it != graph.vertexesEnd(); it++) {
+    for (DinicGraph::VertexIterator it = graph.vertexesBegin();
+                it != graph.vertexesEnd(); it++) {
         Vertex *v = *it;
-        for (DinicGraph::Vertex::EdgeIterator eit = v->edgesBegin(); eit != v->edgesEnd(); eit++) {
+        for (DinicGraph::Vertex::EdgeIterator eit = v->edgesBegin();
+                    eit != v->edgesEnd(); eit++) {
             Edge *e = *eit;
             EdgeProperty *ep = e->getProperty();
             if (ep->getNum() % 2 == 0)
@@ -83,14 +93,17 @@ void DinicFlow::writeEdgesFlow(VectorInputOutputEdgeStructure &edges) {
     }
 }
 
-int64_t DinicFlow::calculateFlow(VectorInputOutputEdgeStructure &edges, int sourceId, int sinkId) {
+int64_t DinicFlow::calculateFlow(VectorInputOutputEdgeStructure &edges,
+            int sourceId, int sinkId) {
     int64_t flowval;
     source = graph.vertexById(sourceId);
     sink = graph.vertexById(sinkId);
     for (int i = 0; i < (int)edges.size(); i++) {
-        Vertex *u = graph.vertexById(edges[i].u), *v = graph.vertexById(edges[i].v);
+        Vertex *u = graph.vertexById(edges[i].u),
+               *v = graph.vertexById(edges[i].v);
         std::pair <Edge*, Edge*> edgePair = graph.newEdgeWithRev(u, v,
-                new EdgeProperty(i * 2, edges[i].capacity), new EdgeProperty(i * 2 + 1, 0));
+                new EdgeProperty(i * 2, edges[i].capacity),
+                new EdgeProperty(i * 2 + 1, 0));
         u->addEdge(edgePair.first);
         v->addEdge(edgePair.second);
     }
@@ -108,16 +121,19 @@ DinicFlow::DinicFlow(int n) {
     graph.init(n);
 }
 
-int64_t DinicScalingFlow::calculateFlow(VectorInputOutputEdgeStructure &edges, int sourceId, int sinkId) {
+int64_t DinicScalingFlow::calculateFlow(VectorInputOutputEdgeStructure &edges,
+            int sourceId, int sinkId) {
     int64_t flowval;
     source = graph.vertexById(sourceId);
     sink = graph.vertexById(sinkId);
     int maximalEdgeCapacity = 0;
     for (int i = 0; i < (int)edges.size(); i++) {
         ifLessThenInsrease(maximalEdgeCapacity, edges[i].capacity);
-        Vertex *u = graph.vertexById(edges[i].u), *v = graph.vertexById(edges[i].v);
+        Vertex *u = graph.vertexById(edges[i].u),
+               *v = graph.vertexById(edges[i].v);
         std::pair <Edge*, Edge*> edgePair = graph.newEdgeWithRev(u, v,
-                new EdgeProperty(i * 2, edges[i].capacity), new EdgeProperty(i * 2 + 1, 0));
+                new EdgeProperty(i * 2, edges[i].capacity),
+                new EdgeProperty(i * 2 + 1, 0));
         u->addEdge(edgePair.first);
         v->addEdge(edgePair.second);
     }

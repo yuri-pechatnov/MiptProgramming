@@ -12,13 +12,14 @@ int main()
 {
     freopen("input.txt", "rt", stdin);
     int N, M;
-    VectorInputOutputEdgeStructure inputOutputEdgesStructuresItsVeryLongVariableNameJustForFunAndBecauseMisunderstandingAPurposeOfThis;
+    VectorInputOutputEdgeStructure inputOutputEdgesStructures;
     cin >> N >> M;
-    inputOutputEdgesStructuresItsVeryLongVariableNameJustForFunAndBecauseMisunderstandingAPurposeOfThis.resize(M);
+    inputOutputEdgesStructures.resize(M);
     for (int i = 0; i < M; i++) {
         int u, v, c;
         cin >> u >> v >> c;
-        inputOutputEdgesStructuresItsVeryLongVariableNameJustForFunAndBecauseMisunderstandingAPurposeOfThis[i] = InputOutputEdgeStructure(u - 1, v - 1, c);
+        inputOutputEdgesStructures[i] =
+            InputOutputEdgeStructure(u - 1, v - 1, c);
     }
     int64_t flowval;
     FlowSolver *flow = NULL;
@@ -26,9 +27,9 @@ int main()
         flow = new DinicScalingFlow(N);
     else
         flow = new PreflowPushFlow(N);
-    flowval = flow->calculateFlow(inputOutputEdgesStructuresItsVeryLongVariableNameJustForFunAndBecauseMisunderstandingAPurposeOfThis, 0, N - 1);
+    flowval = flow->calculateFlow(inputOutputEdgesStructures, 0, N - 1);
     cout << flowval << endl;
     for (int i = 0; i < M; i++)
-        cout << inputOutputEdgesStructuresItsVeryLongVariableNameJustForFunAndBecauseMisunderstandingAPurposeOfThis[i].flow << endl;
+        cout << inputOutputEdgesStructures[i].flow << endl;
     return 0;
 }

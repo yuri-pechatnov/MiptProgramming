@@ -38,13 +38,22 @@ namespace GraphSupportClasses {
 
 
     template <typename PropertyType>
-    PropertyType* PropertyOwner<PropertyType>::getProperty() { return property; }
+    PropertyType* PropertyOwner<PropertyType>::getProperty() {
+        return property;
+    }
     template <typename PropertyType>
-    void PropertyOwner<PropertyType>::setProperty(PropertyType *prop) { property = prop; }
+    void PropertyOwner<PropertyType>::setProperty(PropertyType *prop) {
+        property = prop;
+    }
     template <typename PropertyType>
-    PropertyOwner<PropertyType>::PropertyOwner(PropertyType *prop): property(prop) { assert(property != NULL); }
+    PropertyOwner<PropertyType>::PropertyOwner(PropertyType *prop):
+        property(prop) {
+        assert(property != NULL);
+    }
     template <typename PropertyType>
-    PropertyOwner<PropertyType>::~PropertyOwner() { delete property; }
+    PropertyOwner<PropertyType>::~PropertyOwner() {
+        delete property;
+    }
 
     template <typename VertexProperty, typename EdgeProperty>
     class Edge;
@@ -66,16 +75,26 @@ namespace GraphSupportClasses {
     };
 
     template <typename VertexProperty, typename EdgeProperty>
-    typename Vertex<VertexProperty, EdgeProperty>::EdgeIterator Vertex<VertexProperty, EdgeProperty>::edgesBegin() { return next.begin(); }
+    typename Vertex<VertexProperty, EdgeProperty>::EdgeIterator
+                Vertex<VertexProperty, EdgeProperty>::edgesBegin() {
+        return next.begin();
+    }
 
     template <typename VertexProperty, typename EdgeProperty>
-    typename Vertex<VertexProperty, EdgeProperty>::EdgeIterator Vertex<VertexProperty, EdgeProperty>::edgesEnd() { return next.end(); }
+    typename Vertex<VertexProperty, EdgeProperty>::EdgeIterator
+                Vertex<VertexProperty, EdgeProperty>::edgesEnd() {
+        return next.end();
+    }
 
     template <typename VertexProperty, typename EdgeProperty>
-    int Vertex<VertexProperty, EdgeProperty>::getId() { return id; }
+    int Vertex<VertexProperty, EdgeProperty>::getId() {
+        return id;
+    }
 
     template <typename VertexProperty, typename EdgeProperty>
-    void Vertex<VertexProperty, EdgeProperty>::addEdge(EdgePropSpec* e) { next.push_back(e); }
+    void Vertex<VertexProperty, EdgeProperty>::addEdge(EdgePropSpec* e) {
+        next.push_back(e);
+    }
 
     template <typename VertexProperty, typename EdgeProperty>
     Vertex<VertexProperty, EdgeProperty>::Vertex() {}
@@ -84,7 +103,8 @@ namespace GraphSupportClasses {
     Vertex<VertexProperty, EdgeProperty>::Vertex(int n): id(n) {}
 
     template <typename VertexProperty, typename EdgeProperty>
-    Vertex<VertexProperty, EdgeProperty>::Vertex(int n, VertexProperty *prop): PropertyOwner<VertexProperty>(prop), id(n) {}
+    Vertex<VertexProperty, EdgeProperty>::Vertex(int n, VertexProperty *prop):
+            PropertyOwner<VertexProperty>(prop), id(n) {}
 
 
     template <typename VertexProperty, typename EdgeProperty>
@@ -103,16 +123,19 @@ namespace GraphSupportClasses {
     };
 
     template <typename VertexProperty, typename EdgeProperty>
-    Vertex<VertexProperty, EdgeProperty>* Edge <VertexProperty, EdgeProperty>::to() {
+    Vertex<VertexProperty, EdgeProperty>*
+                Edge <VertexProperty, EdgeProperty>::to() {
         return destVertex;
     }
     template <typename VertexProperty, typename EdgeProperty>
-    Vertex <VertexProperty, EdgeProperty>* Edge <VertexProperty, EdgeProperty>::from() {
+    Vertex <VertexProperty, EdgeProperty>*
+                Edge <VertexProperty, EdgeProperty>::from() {
         assert(revEdge != NULL);
         return revEdge->to();
     }
     template <typename VertexProperty, typename EdgeProperty>
-    Edge <VertexProperty, EdgeProperty> *Edge <VertexProperty, EdgeProperty>::reverseEdge() {
+    Edge <VertexProperty, EdgeProperty>*
+                Edge<VertexProperty, EdgeProperty>::reverseEdge() {
         return revEdge;
     }
     template <typename VertexProperty, typename EdgeProperty>
@@ -122,7 +145,8 @@ namespace GraphSupportClasses {
         destVertex(v) {
     }
     template <typename VertexProperty, typename EdgeProperty>
-    Edge <VertexProperty, EdgeProperty>::Edge(VertexPropSpec *v, EdgeProperty *prop):
+    Edge <VertexProperty, EdgeProperty>::Edge(VertexPropSpec *v,
+                EdgeProperty *prop):
         PropertyOwner<EdgeProperty>(prop), destVertex(v) {
     }
 };
@@ -142,7 +166,8 @@ class Graph {
     VertexIterator vertexesBegin();
     VertexIterator vertexesEnd();
     Edge *newEdge(Vertex *x, EdgeProperty *edgeProp);
-    pair <Edge*, Edge*> newEdgeWithRev(Vertex* from, Vertex *to, EdgeProperty *fw, EdgeProperty *bk);
+    pair <Edge*, Edge*> newEdgeWithRev(Vertex* from, Vertex *to,
+                EdgeProperty *fw, EdgeProperty *bk);
   private:
     typedef typename vector <Edge*>::iterator EdgeIterator;
     vector <Vertex*> vertexes;
@@ -166,7 +191,9 @@ class Graph {
 
 template <typename VertexProperty, typename EdgeProperty>
 template <typename RelevantEdgeDecider>
-void Graph<VertexProperty, EdgeProperty>::bfs(typename Graph<VertexProperty, EdgeProperty>::Vertex *s, RelevantEdgeDecider relevantEdgeDecider) {
+void Graph<VertexProperty, EdgeProperty>::bfs(
+            typename Graph<VertexProperty, EdgeProperty>::Vertex *s,
+            RelevantEdgeDecider relevantEdgeDecider) {
     for (VertexIterator v = vertexesBegin(); v != vertexesEnd(); v++)
         (*v)->getProperty()->distance = -1;
     std::queue<Vertex*> q;
@@ -176,7 +203,8 @@ void Graph<VertexProperty, EdgeProperty>::bfs(typename Graph<VertexProperty, Edg
         Vertex *v = q.front();
         int newDistance = v->getProperty()->distance + 1;
         q.pop();
-        for (typename Vertex::EdgeIterator it = v->edgesBegin(); it != v->edgesEnd(); it++) {
+        for (typename Vertex::EdgeIterator it = v->edgesBegin();
+                    it != v->edgesEnd(); it++) {
             Edge *e = *it;
             Vertex *u = e->to();
             if (u->getProperty()->distance == -1 && relevantEdgeDecider(e)) {
@@ -188,24 +216,32 @@ void Graph<VertexProperty, EdgeProperty>::bfs(typename Graph<VertexProperty, Edg
 }
 
 template <typename VertexProperty, typename EdgeProperty>
-typename Graph<VertexProperty, EdgeProperty>::VertexIterator Graph<VertexProperty, EdgeProperty>::vertexesBegin() {
+typename Graph<VertexProperty, EdgeProperty>::VertexIterator
+            Graph<VertexProperty, EdgeProperty>::vertexesBegin() {
     return vertexes.begin();
 }
 
 template <typename VertexProperty, typename EdgeProperty>
-typename Graph<VertexProperty, EdgeProperty>::VertexIterator Graph<VertexProperty, EdgeProperty>::vertexesEnd() {
+typename Graph<VertexProperty, EdgeProperty>::VertexIterator
+            Graph<VertexProperty, EdgeProperty>::vertexesEnd() {
     return vertexes.end();
 }
 
 template <typename VertexProperty, typename EdgeProperty>
-typename Graph<VertexProperty, EdgeProperty>::Edge *Graph<VertexProperty, EdgeProperty>::newEdge(Vertex *x, EdgeProperty *edgeProp) {
+typename Graph<VertexProperty, EdgeProperty>::Edge*
+            Graph<VertexProperty, EdgeProperty>::newEdge(Vertex *x,
+                        EdgeProperty *edgeProp) {
     edges.push_back(new Edge(x, edgeProp));
     return edges.back();
 }
 
 template <typename VertexProperty, typename EdgeProperty>
-pair <typename Graph<VertexProperty, EdgeProperty>::Edge*, typename Graph<VertexProperty, EdgeProperty>::Edge*>
-            Graph<VertexProperty, EdgeProperty>::newEdgeWithRev(Vertex* from, Vertex *to, EdgeProperty *forwardEdgeProperty, EdgeProperty *backwardEdgeProperty) {
+pair <typename Graph<VertexProperty, EdgeProperty>::Edge*,
+      typename Graph<VertexProperty, EdgeProperty>::Edge*>
+            Graph<VertexProperty, EdgeProperty>::newEdgeWithRev(
+                    Vertex* from, Vertex *to,
+                    EdgeProperty *forwardEdgeProperty,
+                    EdgeProperty *backwardEdgeProperty) {
     Edge *forwardEdge, *backwardEdge;
     edges.push_back(forwardEdge = new Edge(to, forwardEdgeProperty));
     edges.push_back(backwardEdge = new Edge(from, backwardEdgeProperty));
@@ -215,7 +251,8 @@ pair <typename Graph<VertexProperty, EdgeProperty>::Edge*, typename Graph<Vertex
 }
 
 template <typename VertexProperty, typename EdgeProperty>
-typename Graph<VertexProperty, EdgeProperty>::Vertex *Graph<VertexProperty, EdgeProperty>::vertexById(int i) {
+typename Graph<VertexProperty, EdgeProperty>::Vertex*
+            Graph<VertexProperty, EdgeProperty>::vertexById(int i) {
     return vertexes[i];
 }
 

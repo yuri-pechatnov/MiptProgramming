@@ -19,7 +19,8 @@ namespace PreflowPushSupportClasses {
         int64_t excess;
         PreflowPushGraph::Vertex::EdgeIterator iteratorOnFirstNonPushedEdge;
 
-        void clear(const Graph <VertexProperty, EdgeProperty>::Vertex::EdgeIterator &iteratorToBegin);
+        void clear(const Graph <VertexProperty, EdgeProperty>
+                    ::Vertex::EdgeIterator &iteratorToBegin);
     };
     class EdgeProperty {
         int num, initCapacity, flow;
@@ -48,7 +49,8 @@ class PreflowPushFlow : public FlowSolver {
     typedef PreflowPushSupportClasses::PreflowPushGraph PreflowPushGraph;
     typedef PreflowPushSupportClasses::VertexProperty VertexProperty;
     typedef PreflowPushSupportClasses::EdgeProperty EdgeProperty;
-    typedef PreflowPushSupportClasses::DischargingQueueAssistant DischargingQueueAssistant;
+    typedef PreflowPushSupportClasses::DischargingQueueAssistant
+                                                DischargingQueueAssistant;
     typedef PreflowPushGraph::Vertex Vertex;
     typedef PreflowPushGraph::Edge Edge;
 
@@ -64,8 +66,10 @@ class PreflowPushFlow : public FlowSolver {
     void globalRelabel();
     static bool reverseEdgeIsNotSaturated(Edge *e);
   public:
-    virtual int64_t calculateFlow(VectorInputOutputEdgeStructure &edges, int sourceNum, int sinkNum);
-    int64_t calculateFlowWithHeuristics(VectorInputOutputEdgeStructure &edges, int sourceNum, int sinkNum);
+    virtual int64_t calculateFlow(VectorInputOutputEdgeStructure &edges,
+                int sourceNum, int sinkNum);
+    int64_t calculateFlowWithHeuristics(VectorInputOutputEdgeStructure &edges,
+                int sourceNum, int sinkNum);
     PreflowPushFlow(int N);
 };
 

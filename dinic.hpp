@@ -56,13 +56,15 @@ class DinicFlow : public FlowSolver {
     void pushFixedWhilePossible(int m, int64_t &flowval);
     void writeEdgesFlow(VectorInputOutputEdgeStructure &edges);
   public:
-    virtual int64_t calculateFlow(VectorInputOutputEdgeStructure &edges, int sourceNum, int sinkNum);
+    virtual int64_t calculateFlow(VectorInputOutputEdgeStructure &edges,
+                int sourceNum, int sinkNum);
     DinicFlow(int n);
 };
 
 class DinicScalingFlow : public DinicFlow {
   public:
-    virtual int64_t calculateFlow(VectorInputOutputEdgeStructure &edges, int sourceNum, int sinkNum);
+    virtual int64_t calculateFlow(VectorInputOutputEdgeStructure &edges,
+                int sourceNum, int sinkNum);
     DinicScalingFlow(int n);
 };
 
