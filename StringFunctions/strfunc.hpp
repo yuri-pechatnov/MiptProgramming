@@ -18,10 +18,15 @@ class StringFunction {
     void calculateAndWrite(String string, OutputIterator outputIterator);
 };
 
+class FindOccurenceHandler {
+  public:
+    virtual void operator()(int position) const = 0;
+};
+
 class SuitableForFindingOccurences {
   public:
     virtual void findOccurences(String text, String substring,
-    IntVector &occurences) = 0;
+                const FindOccurenceHandler &findOccurenceHandler) = 0;
 };
 
 class SuitableForFindingMaximalPalindromes {
@@ -54,7 +59,7 @@ class PrefixFunction : public StringFunction,
     virtual void calculateAndWriteToVector(String string,
                 IntVector &stringFunction);
     virtual void findOccurences(String text, String substring,
-        IntVector &occurences);
+        const FindOccurenceHandler &findOccurenceHandler);
     PrefixFunction();
 };
 
@@ -64,7 +69,7 @@ class ZFunction : public StringFunction,
     virtual void calculateAndWriteToVector(String string,
                 IntVector &stringFunction);
     virtual void findOccurences(String text, String substring,
-        IntVector &occurences);
+        const FindOccurenceHandler &findOccurenceHandler);
     ZFunction();
 };
 

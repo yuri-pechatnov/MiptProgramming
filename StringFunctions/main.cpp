@@ -5,12 +5,21 @@
 #include "strfunc.hpp"
 
 #define USE_ZFUNCTION 0
-#define SOLVE_FIND_SUBSTRING_TASK 0
-#define SOLVE_FIND_MAXIMAL_SUBPALINDROME_TASK 1
+#define SOLVE_FIND_SUBSTRING_TASK 1
+#define SOLVE_FIND_MAXIMAL_SUBPALINDROME_TASK 0
 
 using std::cin;
 using std::cout;
 using std::endl;
+
+class TypeOccurences : public FindOccurenceHandler {
+  public:
+    virtual void operator()(int position) const ;
+};
+
+void TypeOccurences::operator()(int position) const {
+    cout << position << " ";
+}
 
 int main()
 {
@@ -29,11 +38,7 @@ int main()
         } else {
             occurencesFinder = new PrefixFunction();
         }
-        occurencesFinder->findOccurences(text, substring, resultOccurences);
-        for (IntVector::iterator resultIterator = resultOccurences.begin();
-                resultIterator != resultOccurences.end(); resultIterator++) {
-            cout << *resultIterator << " ";
-        }
+        occurencesFinder->findOccurences(text, substring, TypeOccurences());
         cout << endl;
     }
     if (SOLVE_FIND_MAXIMAL_SUBPALINDROME_TASK) {

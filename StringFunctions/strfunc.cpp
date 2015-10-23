@@ -20,17 +20,21 @@ void PrefixFunction::calculateAndWriteToVector(
 }
 
 void PrefixFunction::findOccurences(String text, String substring,
-        IntVector &occurences) {
-    IntVector stringFunction;
-    String specialString = substring + specialSymbol + text;
-    occurences.clear();
-    calculateAndWriteToVector(specialString, stringFunction);
-    int textBeginPosition = substring.size() + 1;
-    for (int currentTextPosition = 0; currentTextPosition < (int)text.size();
-                currentTextPosition++) {
-        if (stringFunction[textBeginPosition + currentTextPosition]
-                >= (int)substring.size()) {
-            occurences.push_back(currentTextPosition - substring.size() + 1);
+        const FindOccurenceHandler &findOccurenceHandler) {
+    IntVector substringFunction;
+    calculateAndWriteToVector(substring, substringFunction);
+    int currentFunctionValue = 0;
+    for (int currentPosition = 0; currentPosition < (int)text.size();
+                currentPosition++) {
+        while (currentFunctionValue > 0
+                && text[currentPosition] != substring[currentFunctionValue]) {
+            currentFunctionValue = substringFunction[currentFunctionValue - 1];
+        }
+        currentFunctionValue +=
+            + (currentFunctionValue < substring.size()
+                && text[currentPosition] == substring[currentFunctionValue]);
+        if (currentFunctionValue == (int)substring.size()) {
+            findOccurenceHandler(currentPosition - substring.size() + 1);
         }
     }
 }
@@ -68,17 +72,34 @@ void ZFunction::calculateAndWriteToVector(
 
 
 void ZFunction::findOccurences(String text, String substring,
-        IntVector &occurences) {
-    IntVector stringFunction;
-    String specialString = substring + specialSymbol + text;
-    occurences.clear();
-    calculateAndWriteToVector(specialString, stringFunction);
-    int textBeginPosition = substring.size() + 1;
-    for (int currentTextPosition = 0; currentTextPosition < (int)text.size();
-                currentTextPosition++) {
-        if (stringFunction[textBeginPosition + currentTextPosition]
-                >= (int)substring.size()) {
-            occurences.push_back(currentTextPosition);
+        const FindOccurenceHandler& findOccurenceHandler) {
+    IntVector substringFunction;
+    calculateAndWriteToVector(substring, substringFunction);
+    int mostRightBound = -1, mostRightBoundBegin = -1;
+    for (int currentPosition = 0; currentPosition < (int)text.size();
+                currentPosition++) {
+        int currentFunctionValue = 0;
+        if (currentPosition < mostRightBound) {
+            currentFunctionValue =
+                std::min(substringFunction[currentPosition
+                    - mostRightBoundBegin],
+                mostRightBound - currentPosition);
+        }
+        while (currentPosition + currentFunctionValue
+                < (int)text.size()
+                && currentFunctionValue < (int)substring.size()
+                && text[currentPosition + currentFunctionValue]
+                == substring[currentFunctionValue]) {
+            currentFunctionValue++;
+        }
+        if (currentPosition + currentFunctionValue
+                > mostRightBound) {
+            mostRightBound = currentPosition
+                + currentFunctionValue;
+            mostRightBoundBegin = currentPosition;
+        }
+        if (currentFunctionValue == (int)substring.size()) {
+            findOccurenceHandler(currentPosition);
         }
     }
 }
