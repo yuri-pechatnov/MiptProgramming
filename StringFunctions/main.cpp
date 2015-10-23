@@ -4,9 +4,9 @@
 
 #include "strfunc.hpp"
 
-#define USE_ZFUNCTION 0
-#define SOLVE_FIND_SUBSTRING_TASK 1
-#define SOLVE_FIND_MAXIMAL_SUBPALINDROME_TASK 0
+#define USE_ZFUNCTION 1
+#define SOLVE_FIND_SUBSTRING_TASK 0
+#define SOLVE_FIND_MAXIMAL_SUBPALINDROME_TASK 1
 
 using std::cin;
 using std::cout;
@@ -28,6 +28,8 @@ int main()
     #else
         std::ios::sync_with_stdio(false);
     #endif
+
+
     if (SOLVE_FIND_SUBSTRING_TASK) {
         String text, substring;
         cin >> substring >> text;
@@ -45,12 +47,10 @@ int main()
         String text;
         cin >> text;
         IntVector z;
-        PalindromeFunction().calculateAndWriteToVector(text, z);
-        int palindromeBegin, palindromeEnd;
+        int palindromeBegin, palindromeLength;
         PalindromeFunction().findMaximalPalindrom(text,
-            palindromeBegin, palindromeEnd);
-        cout << text.substr(palindromeBegin,
-            palindromeEnd - palindromeBegin) << endl;
+            palindromeBegin, palindromeLength);
+        cout << text.substr(palindromeBegin, palindromeLength) << endl;
     }
     return 0;
 }
