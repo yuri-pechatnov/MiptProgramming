@@ -3,6 +3,7 @@
 #include <cassert>
 
 #include "dinic.hpp"
+#include "search.hpp"
 
 
 
@@ -24,7 +25,7 @@ namespace DinicSupportClasses {
     EdgeProperty::EdgeProperty(int n, int cap):
         num(n), initCapacity(cap), flow(0) {}
 
-    bool ResidualCapacityGreaterThen::operator()(DinicGraph::Edge* e) {
+    bool ResidualCapacityGreaterThen::operator()(DinicGraph::Edge* e) const {
         return e->getProperty()->residualCapacity() >= x;
     }
     ResidualCapacityGreaterThen::ResidualCapacityGreaterThen(int x_): x(x_) {}
@@ -33,7 +34,9 @@ namespace DinicSupportClasses {
 
 
 bool DinicFlow::bfsFixed(int m) {
-    graph.bfs(source, DinicSupportClasses::ResidualCapacityGreaterThen(m));
+    BreadthFirstSearch<VertexProperty, EdgeProperty> breadthFirstSearch;
+    breadthFirstSearch.searchStandartDistanceSetter(graph, source,
+            DinicSupportClasses::ResidualCapacityGreaterThen(m));
     return sink->getProperty()->distance != -1;
 }
 

@@ -43,6 +43,11 @@ namespace PreflowPushSupportClasses {
         q(q_), last(NULL), lastExcess(-1) {
     }
 
+    bool ReverseEdgeIsNotSaturated::operator()(PreflowPushGraph::Edge* edge) const {
+        return edge->reverseEdge()->getProperty()->residualCapacity() > 0;
+    }
+
+    ReverseEdgeIsNotSaturated::ReverseEdgeIsNotSaturated() {}
 };
 
 void PreflowPushFlow::push(Vertex *v, Edge *e) {
@@ -113,12 +118,13 @@ void PreflowPushFlow::discharge(Vertex *v,
     }
 }
 
-bool PreflowPushFlow::reverseEdgeIsNotSaturated(Edge *e) {
-    return e->reverseEdge()->getProperty()->residualCapacity() > 0;
-}
+
+
 
 void PreflowPushFlow::globalRelabel() {
-    graph.bfs(sink, reverseEdgeIsNotSaturated);
+    BreadthFirstSearch<VertexProperty, EdgeProperty> breadthFirstSearch;
+    breadthFirstSearch.searchStandartDistanceSetter(graph, sink,
+            PreflowPushSupportClasses::ReverseEdgeIsNotSaturated());
     for (PreflowPushGraph::VertexIterator vIterator = graph.vertexesBegin();
                 vIterator != graph.vertexesEnd(); vIterator++) {
         Vertex *v = *vIterator;

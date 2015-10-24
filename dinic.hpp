@@ -3,6 +3,7 @@
 
 
 #include "graph.hpp"
+#include "search.hpp"
 #include "flow.hpp"
 
 
@@ -29,10 +30,11 @@ namespace DinicSupportClasses {
         EdgeProperty(int n, int cap);
     };
 
-    class ResidualCapacityGreaterThen {
+    class ResidualCapacityGreaterThen :
+            public RelevantEdgeDecider <VertexProperty, EdgeProperty> {
         int x;
       public:
-        bool operator()(DinicGraph::Edge* e);
+        bool operator()(DinicGraph::Edge* e) const ;
         ResidualCapacityGreaterThen(int x_);
     };
 };

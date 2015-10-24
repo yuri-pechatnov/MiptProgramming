@@ -6,7 +6,7 @@
 
 using namespace std;
 
-const bool USE_DINIC = true;
+const bool USE_DINIC = false;
 
 int main()
 {

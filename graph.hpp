@@ -175,8 +175,6 @@ class Graph {
     int n;
     Graph &operator=(const Graph &g);
   public:
-    template <typename RelevantEdgeDecider>
-    void bfs(Vertex *s, RelevantEdgeDecider relevantEdgeDecider);
     Vertex* vertexById(int i);
     int size();
     int vertexesCount();
@@ -187,33 +185,6 @@ class Graph {
     ~Graph();
 };
 
-
-
-template <typename VertexProperty, typename EdgeProperty>
-template <typename RelevantEdgeDecider>
-void Graph<VertexProperty, EdgeProperty>::bfs(
-            typename Graph<VertexProperty, EdgeProperty>::Vertex *s,
-            RelevantEdgeDecider relevantEdgeDecider) {
-    for (VertexIterator v = vertexesBegin(); v != vertexesEnd(); v++)
-        (*v)->getProperty()->distance = -1;
-    std::queue<Vertex*> q;
-    q.push(s);
-    s->getProperty()->distance = 0;
-    while (q.size() > 0) {
-        Vertex *v = q.front();
-        int newDistance = v->getProperty()->distance + 1;
-        q.pop();
-        for (typename Vertex::EdgeIterator it = v->edgesBegin();
-                    it != v->edgesEnd(); it++) {
-            Edge *e = *it;
-            Vertex *u = e->to();
-            if (u->getProperty()->distance == -1 && relevantEdgeDecider(e)) {
-                u->getProperty()->distance = newDistance;
-                q.push(u);
-            }
-        }
-    }
-}
 
 template <typename VertexProperty, typename EdgeProperty>
 typename Graph<VertexProperty, EdgeProperty>::VertexIterator

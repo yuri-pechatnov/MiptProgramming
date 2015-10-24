@@ -5,6 +5,7 @@
 
 #include "graph.hpp"
 #include "flow.hpp"
+#include "search.hpp"
 
 
 namespace PreflowPushSupportClasses {
@@ -41,6 +42,13 @@ namespace PreflowPushSupportClasses {
         void prepare(PreflowPushGraph::Vertex *now);
         void push();
         DischargingQueueAssistant(std::queue <PreflowPushGraph::Vertex*> &q);
+    };
+
+    class ReverseEdgeIsNotSaturated :
+            public RelevantEdgeDecider <VertexProperty, EdgeProperty> {
+      public:
+        bool operator()(PreflowPushGraph::Edge* e) const;
+        ReverseEdgeIsNotSaturated();
     };
 };
 
