@@ -63,7 +63,6 @@ class KoAluruSuffixArray {
     void putLessTypeOnPlace();
     void putGreaterTypeOnPlace();
     void generateSuffixArray();
-    void unreverseAlphabetIfNeeded();
 
   public:
     void test();

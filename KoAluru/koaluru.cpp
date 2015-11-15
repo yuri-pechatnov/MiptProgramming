@@ -3,6 +3,9 @@
 #include <algorithm>
 #include <iostream>
 #include <iomanip>
+#include <cassert>
+
+
 
 using std::cerr;
 using std::endl;
@@ -71,6 +74,7 @@ void KoAluruSuffixArray::reverseAlphabetIfNeeded() {
     } else {
         isReversed = false;
     }
+    assert(lessCount * 2 - 2 < (int)string.size());
 }
 
 void KoAluruSuffixArray::generateInitialSuffixArray() {
@@ -93,13 +97,16 @@ void KoAluruSuffixArray::divideInBuckets() {
     for (int i = 1; i < alphabetSize; i++)
         bucketLeftBound[i] = bucketRightBound[i - 1];
     bucketInsertPosition = bucketLeftBound;
+    int control = 0;
     for (int i = 0; i < (int)string.size(); i++) {
         while (i < bucketLeftBound[string[positionToSuffix[i]]]
                 || i >= bucketRightBound[string[positionToSuffix[i]]]) {
             swapSuffixes(i, bucketInsertPosition[string[
                     positionToSuffix[i]]]++);
+            control++;
         }
     }
+    assert(control <= (int)string.size() * 2);
 }
 
 
@@ -134,6 +141,7 @@ void KoAluruSuffixArray::calculateLessDistanceLists() {
 
 void KoAluruSuffixArray::calculateDivideLists() {
     divideLists.clear();
+    int control = 0;
     for (int i = 0; i < (int)lessDistanceLists.size(); i++) {
         int equalsBegin = 0;
         int newListsBegin = divideLists.size();
@@ -145,6 +153,7 @@ void KoAluruSuffixArray::calculateDivideLists() {
                     lessDistanceLists[i].begin() + j));
                 equalsBegin = j;
             }
+            control++;
         }
         if (lessDistanceLists[i].size() > 0) {
             divideLists.push_back(IntVector(
@@ -154,9 +163,11 @@ void KoAluruSuffixArray::calculateDivideLists() {
         for (int j = newListsBegin; j < (int)divideLists.size(); j++) {
             for (int k = 0; k < divideLists[j].size(); k++) {
                 divideLists[j][k] -= i;
+                control++;
             }
         }
     }
+    assert(control <= (int)string.size() * 4);
 }
 
 void KoAluruSuffixArray::calculateLessPositions() {
@@ -173,6 +184,7 @@ void KoAluruSuffixArray::calculateLessPositions() {
 void KoAluruSuffixArray::calculateLessTypeDivision() {
     lessBuckets.push_back(LessBucket(0, lessPositionToSuffix.size()));
     lessToBucket.assign(lessPositionToSuffix.size(), lessBuckets.begin());
+    int control = 0;
     for (int i = 0; i < divideLists.size(); i++) {
         for (int j = 0; j < divideLists[i].size(); j++) {
             std::list <LessBucket>::iterator bucketIterator =
@@ -185,6 +197,11 @@ void KoAluruSuffixArray::calculateLessTypeDivision() {
                     newBucketIterator;
             IntVector &needPullFront = bucketIterator->needPullFront;
             if (needPullFront.size() > 0) {
+                if (needPullFront.size() == bucketIterator->rightBound
+                    - bucketIterator->leftBound) {
+                    needPullFront.clear();
+                    continue;
+                }
                 lessBuckets.insert(bucketIterator,
                     LessBucket(bucketIterator->leftBound,
                         bucketIterator->leftBound + needPullFront.size()));
@@ -195,18 +212,23 @@ void KoAluruSuffixArray::calculateLessTypeDivision() {
                     lessToBucket[insertBound] = newBucketIterator;
                     swapLess(suffixToLessPosition[*it], insertBound);
                     insertBound++;
+                    control++;
                 }
                 needPullFront.clear();
             }
         }
     }
+    assert(control <= (int)string.size() * 4);
     lessBucketNum.resize(lessPositionToSuffix.size());
     int current = 1;
+    int left = 0;
     for (std::list <LessBucket>::iterator it = lessBuckets.begin();
             it != lessBuckets.end(); it++) {
+        assert(it->leftBound == left);
         for (int i = it->leftBound; i < it->rightBound; i++) {
             lessBucketNum[i] = current;
         }
+        left = it->rightBound;
         current += (it->leftBound != it->rightBound);
     }
 }
@@ -220,6 +242,8 @@ void KoAluruSuffixArray::sortLessType() {
             recursiveString.push_back(lessBucketNum[suffixToLessPosition[i]]);
         }
     }
+
+    assert(recursiveString.size() * 2 < string.size() + 2);
     stringToSuffixArray(recursiveString, sortedLess);
     for (int i = 0; i < (int)sortedLess.size(); i++)
         sortedLess[i] = recursiveConnection[sortedLess[i]];
@@ -252,15 +276,15 @@ void KoAluruSuffixArray::putGreaterTypeOnPlace() {
 
 void KoAluruSuffixArray::generateSuffixArray() {
     suffixArray.clear();
-    suffixArray.insert(suffixArray.begin(),
-        positionToSuffix.begin() + 1, positionToSuffix.end());
-}
 
-void KoAluruSuffixArray::unreverseAlphabetIfNeeded() {
+    suffixArray.insert(suffixArray.begin(),
+        positionToSuffix.begin() + !isReversed,
+        positionToSuffix.end() - isReversed);
     if (isReversed) {
         std::reverse(suffixArray.begin(), suffixArray.end());
     }
 }
+
 
 void KoAluruSuffixArray::test() {
     int str[] = {2, 1, 4, 4, 1, 4, 4, 1, 3, 3, 1};
@@ -389,6 +413,7 @@ void KoAluruSuffixArray::calculate() {
     if (string.size() > 2) {
         calculateAlphabetSize();
         calculateTypes();
+        reverseAlphabetIfNeeded();
         generateInitialSuffixArray();
         divideInBuckets();
         calculateLessDistance();
