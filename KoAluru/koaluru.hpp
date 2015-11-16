@@ -8,8 +8,7 @@
 namespace KoAluruSuffixArrayAssistantClasses {
     class LessBucket {
       public:
-        int leftBound, rightBound;
-        std::vector <int> needPullFront;
+        int leftBound, rightBound, editTime;
         LessBucket(int left = 0, int right = 0);
     };
 };
@@ -39,9 +38,7 @@ class KoAluruSuffixArray {
     IntVector lessDistance; // index - position
     std::vector <IntVector> lessDistanceLists,
             divideLists; // unimportant indexes, important order
-    std::list <LessBucket> lessBuckets;
-    std::vector<std::list <LessBucket>::iterator> lessToBucket;
-    IntVector lessBucketNum;
+    IntVector lessType;
     IntVector sortedLess;
     IntVector suffixArray;
 
@@ -65,7 +62,7 @@ class KoAluruSuffixArray {
     void generateSuffixArray();
 
   public:
-    void test();
+    void testAndShow(IntVector string);
 
     void setString(IntVectorConstReference string);
     void calculate();

@@ -58,11 +58,20 @@ int main()
 {
     #ifdef DEBUG
     freopen("001", "rt", stdin);
-    //freopen("out", "wt", stderr);
     #endif // DEBUG
 
 
     if (1) {
+        freopen("out", "wt", stderr);
+        KoAluruSuffixArray koala;
+        int str[] = {2, 1, 4, 4, 1, 4, 4, 1, 3, 3, 1};
+        vector <int> strv;
+        strv.insert(strv.begin(), str + 0, str + 11);
+        koala.testAndShow(strv);
+        exit(0);
+    }
+
+    if (0) {
         string s;
         cin >> s;
         vector <int> str(s.begin(), s.end()), suf;

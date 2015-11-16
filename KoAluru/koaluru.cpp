@@ -17,7 +17,7 @@ typedef KoAluruSuffixArray::IntVectorConstReference IntVectorConstReference;
 
 namespace KoAluruSuffixArrayAssistantClasses {
     LessBucket::LessBucket(int left, int right): leftBound(left),
-                                                rightBound(right) {};
+                                            rightBound(right), editTime(-1) {};
 };
 
 void KoAluruSuffixArray::swapSuffixes(int firstPosition, int secondPosition) {
@@ -182,51 +182,52 @@ void KoAluruSuffixArray::calculateLessPositions() {
 }
 
 void KoAluruSuffixArray::calculateLessTypeDivision() {
+    for (int i = 0; i < divideLists.size(); i++) {
+        for (int j = 0; j < divideLists[i].size(); j++) {
+            divideLists[i][j] = suffixToLessPosition[divideLists[i][j]];
+        }
+    }
+    std::list <LessBucket> lessBuckets;
+    std::vector<std::list <LessBucket>::iterator> lessToBucket;
+    IntVector lesses(lessPositionToSuffix.size()),
+            whereLesses(lessPositionToSuffix.size());
+    for (int i = 0; i < lesses.size(); i++) {
+        whereLesses[i] = lesses[i] = i;
+    }
     lessBuckets.push_back(LessBucket(0, lessPositionToSuffix.size()));
     lessToBucket.assign(lessPositionToSuffix.size(), lessBuckets.begin());
     int control = 0;
     for (int i = 0; i < divideLists.size(); i++) {
         for (int j = 0; j < divideLists[i].size(); j++) {
+            int current = divideLists[i][j];
             std::list <LessBucket>::iterator bucketIterator =
-                    lessToBucket[suffixToLessPosition[ divideLists[i][j] ]];
-            bucketIterator->needPullFront.push_back(divideLists[i][j]);
-        }
-        for (int j = 0; j < divideLists[i].size(); j++) {
-            std::list <LessBucket>::iterator bucketIterator =
-                    lessToBucket[suffixToLessPosition[ divideLists[i][j] ]],
-                    newBucketIterator;
-            IntVector &needPullFront = bucketIterator->needPullFront;
-            if (needPullFront.size() > 0) {
-                if (needPullFront.size() == bucketIterator->rightBound
-                    - bucketIterator->leftBound) {
-                    needPullFront.clear();
-                    continue;
-                }
+                    lessToBucket[current], previousBucketIterator;
+            if (bucketIterator->editTime != i) {
                 lessBuckets.insert(bucketIterator,
                     LessBucket(bucketIterator->leftBound,
-                        bucketIterator->leftBound + needPullFront.size()));
-                --(newBucketIterator = bucketIterator);
-                int &insertBound = bucketIterator->leftBound;
-                for (IntVector::iterator it = needPullFront.begin();
-                        it != needPullFront.end(); it++) {
-                    lessToBucket[insertBound] = newBucketIterator;
-                    swapLess(suffixToLessPosition[*it], insertBound);
-                    insertBound++;
-                    control++;
-                }
-                needPullFront.clear();
+                    bucketIterator->leftBound));
             }
+            bucketIterator->editTime = i;
+            --(previousBucketIterator = bucketIterator);
+            lessToBucket[current] = previousBucketIterator;
+            int &firstLess = lesses[whereLesses[current]],
+                &secondLess = lesses[bucketIterator->leftBound];
+            std::swap(whereLesses[firstLess], whereLesses[secondLess]);
+            std::swap(firstLess, secondLess);
+            previousBucketIterator->rightBound++;
+            bucketIterator->leftBound++;
         }
     }
     assert(control <= (int)string.size() * 4);
-    lessBucketNum.resize(lessPositionToSuffix.size());
+    lessType.resize(string.size());
     int current = 1;
     int left = 0;
+
     for (std::list <LessBucket>::iterator it = lessBuckets.begin();
             it != lessBuckets.end(); it++) {
         assert(it->leftBound == left);
         for (int i = it->leftBound; i < it->rightBound; i++) {
-            lessBucketNum[i] = current;
+            lessType[lessPositionToSuffix[lesses[i]]] = current;
         }
         left = it->rightBound;
         current += (it->leftBound != it->rightBound);
@@ -239,7 +240,7 @@ void KoAluruSuffixArray::sortLessType() {
     for (int i = 0; i < (int)string.size(); i++) {
         if (isLessType[i]) {
             recursiveConnection.push_back(i);
-            recursiveString.push_back(lessBucketNum[suffixToLessPosition[i]]);
+            recursiveString.push_back(lessType[i]);
         }
     }
 
@@ -286,11 +287,7 @@ void KoAluruSuffixArray::generateSuffixArray() {
 }
 
 
-void KoAluruSuffixArray::test() {
-    int str[] = {2, 1, 4, 4, 1, 4, 4, 1, 3, 3, 1};
-    IntVector strv;
-    strv.insert(strv.begin(), str + 0, str + 11);
-
+void KoAluruSuffixArray::testAndShow(IntVector strv) {
     setString(strv);
     calculateAlphabetSize();
     cerr << "alphabetSize = " << alphabetSize << endl;
@@ -351,12 +348,7 @@ void KoAluruSuffixArray::test() {
     for (int i = 0; i < string.size(); i++)
         cerr << setw(3) << string[i];
     cerr << endl;
-    for (int i = 0; i < string.size(); i++)
-        if (isLessType[i] == 1)
-            cerr << setw(3) << lessBucketNum[suffixToLessPosition[i]];
-        else
-            cerr << setw(3) << ' ';
-    cerr << endl;
+
     sortLessType();
     cerr << endl;
     for (int j = 0; j < (int)sortedLess.size(); j++) {
