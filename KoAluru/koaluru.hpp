@@ -74,4 +74,9 @@ class KoAluruSuffixArray {
                     IntVectorReference suffixArray);
 };
 
+void (* const calculateSuffixArray)(
+    KoAluruSuffixArray::IntVectorConstReference string,
+    KoAluruSuffixArray::IntVectorReference suffixArray) =
+    &KoAluruSuffixArray::stringToSuffixArray;
+
 #endif // KOALURU_HPP_INCLUDED

@@ -7,16 +7,7 @@
 
 using namespace std;
 
-int cur = 0;
-char data[200000000];
 
-void *operator new(size_t n) {
-    cur += n;
-    return data + cur - n;
-}
-
-void operator delete(void *g) {
-}
 
 void buildLCP(vector <int> &str, vector <int> &suf, vector <int> &lcp) {
     int len = str.size();
@@ -42,10 +33,10 @@ void buildLCP(vector <int> &str, vector <int> &suf, vector <int> &lcp) {
 
 int f(string _s) {
     vector <int> s(_s.size() + 1), arr, lcp;
-    for (int i = 0; i < _s.size(); i++)
+    for (int i = 0; i < (int)_s.size(); i++)
         s[i] = _s[i] - 'a' + 2;
     s.back() = 1;
-    KoAluruSuffixArray::stringToSuffixArray(s, arr);
+    calculateSuffixArray(s, arr);
     buildLCP(s, arr, lcp);
     int ans = s.size() * (s.size() - 1) / 2;
     for (int i = 0; i < (int)lcp.size(); i++)
@@ -75,7 +66,7 @@ int main()
         string s;
         cin >> s;
         vector <int> str(s.begin(), s.end()), suf;
-        KoAluruSuffixArray::stringToSuffixArray(str, suf);
+        calculateSuffixArray(str, suf);
         for (int i = 0; i < (int)suf.size(); i++)
             cerr << suf[i] << endl;
         exit(0);
@@ -85,9 +76,7 @@ int main()
     string ss, s;
     cin >> n >> s;
     ss = s + s;
-    int ncur = cur;
-    for (int i = 0; i < s.size(); i++) {
-        cur = ncur;
+    for (int i = 0; i < (int)s.size(); i++) {
         cout << f(ss.substr(i, n)) << " ";
     }
     return 0;
