@@ -15,8 +15,8 @@ int SymbolPairFieldGetter::getField(const Type &pairSymbol, int field) const {
     return pairSymbol.first;
 }
 
-void generateMatch(std::vector <PairSymbol> source,
-            std::vector <int> positionToCategory) {
+void SymbolPairMatcher::generateMatch(std::vector <PairSymbol> &source,
+            std::vector <int> &positionToCategory) {
     positionToCategory.resize(source.size());
     for (int i = 0; i < (int)source.size(); i++) {
         source[i].initialPosition = i;
@@ -24,8 +24,8 @@ void generateMatch(std::vector <PairSymbol> source,
     radixSort(source.begin(), source.end(), SymbolPairFieldGetter());
     int currentCategory = 0;
     for (int i = 0; i < (int)source.size(); i++) {
-        currentCategory += (i != 0 && (source[i].first == source[i - 1].first
-                    || source[i].second == source[i - 1].second));
+        currentCategory += (i != 0 && (source[i].first != source[i - 1].first
+                    || source[i].second != source[i - 1].second));
         positionToCategory[source[i].initialPosition] = currentCategory;
     }
 }

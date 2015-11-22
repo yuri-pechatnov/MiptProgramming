@@ -7,8 +7,8 @@ class SparseTable {
     int* table[30];
     int* tablePositions[30];
     int tableSize, levelsCount;
-    inline static int extractDegree(int value);
   public:
+    inline static int extractDegree(int value);
     int calculateMinimumPosition(int leftBorder, int rightBorder);
     void setArray(std::vector <int> array);
     void clear();

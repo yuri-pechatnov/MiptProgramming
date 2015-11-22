@@ -18,8 +18,8 @@ class SymbolPairFieldGetter {
 
 class SymbolPairMatcher {
   public:
-    void generateMatch(std::vector <PairSymbol> source,
-            std::vector <int> positionToCategory);
+    void generateMatch(std::vector <PairSymbol> &source,
+            std::vector <int> &positionToCategory);
 };
 
 #endif // SYMBOL_PAIR_MATCHER_HPP_INCLUDED

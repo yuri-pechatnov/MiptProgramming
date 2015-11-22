@@ -65,7 +65,9 @@ void SparseTable::setArray(std::vector <int> array) {
         }
     }
 }
-SparseTable::SparseTable() {}
+SparseTable::SparseTable() {
+    table[0] = NULL;
+}
 
 void SparseTable::clear() {
     if (table[0] != NULL) {
