@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <cstdio>
 #include <string>
 #include <algorithm>
@@ -7,7 +8,17 @@
 
 using namespace std;
 
+int cur = 0;
+char *data[500000000];
 
+void *operator new(size_t n) {
+    cur += n;
+    return &data[cur - n];
+}
+
+void operator delete(void*) {
+
+}
 
 void buildLCP(vector <int> &str, vector <int> &suf, vector <int> &lcp) {
     int len = str.size();
@@ -47,28 +58,42 @@ int f(string _s) {
 
 int main()
 {
+
+    if (1) {
+        int LIMIT = 1000000;
+        fstream out;
+        out.open("001", ios::out);
+        out << LIMIT << endl;
+        for (int i = 0; i < LIMIT; i++) {
+            out << rand() % LIMIT << " ";
+        }
+        out.close();
+    }
+
     #ifdef DEBUG
     freopen("001", "rt", stdin);
     #endif // DEBUG
 
 
-    if (1) {
+    if (0) {
         freopen("out", "wt", stderr);
         KoAluruSuffixArray koala;
         int str[] = {2, 1, 4, 4, 1, 4, 4, 1, 3, 3, 1};
         vector <int> strv;
-        strv.insert(strv.begin(), str + 0, str + 11);
+        strv.insert(strv.begin(), str + 0, str + 4);
         koala.testAndShow(strv);
         exit(0);
     }
 
-    if (0) {
-        string s;
-        cin >> s;
-        vector <int> str(s.begin(), s.end()), suf;
+    if (1) {
+        int n;
+        cin >> n;
+        vector <int> str(n),  suf;
+        for (int i = 0; i < n; i++)
+            cin >> str[i];
         calculateSuffixArray(str, suf);
-        for (int i = 0; i < (int)suf.size(); i++)
-            cerr << suf[i] << endl;
+        //for (int i = 0; i < (int)suf.size(); i++)
+        //    cerr << suf[i] << endl;
         exit(0);
     }
 

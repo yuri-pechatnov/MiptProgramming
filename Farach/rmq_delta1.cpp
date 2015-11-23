@@ -1,5 +1,7 @@
 #include "rmq_delta1.hpp"
+#include "sparse_table.hpp"
 #include <cassert>
+#include <iostream>
 
 
 
@@ -20,59 +22,45 @@ int RMQDelta1::calculateType(Vector<int>::iterator begin,
 
 void RMQDelta1::setArray(const Vector<int> &array_) {
     array = array_;
-    blockSize = 4;
     blockSize = std::max(1, SparseTable::extractDegree(array.size()) / 2);
     while (array.size() % blockSize) {
-        array.push_back(array.back());
+        array.push_back(array.back() + 1);
     }
     blockCount = (array.size() + blockSize - 1) / blockSize;
     typeCount = (1 << (blockSize - 1));
-    blockType.resize(blockCount);
-    for (int i = 0; i < blockCount; i++) {
-        blockType[i] = calculateType(array.begin() + i * blockSize,
-                                     array.begin() + (i + 1) * blockSize);
-    }
     blockAnswerData.resize(typeCount * blockSize * blockSize);
+    Vector <int> full(blockSize);
     for (int mask = 0; mask < typeCount; mask++) {
-        Vector <int> full(blockSize, 0);
+        full.assign(blockSize, 0);
         for (int position = 1; position < blockSize; position++) {
             full[position] = full[position - 1] +
                 ((mask >> (blockSize - 1 - position)) & 1) * 2 - 1;
         }
         for (int left = 0; left < blockSize; left++) {
+            int answer = full[left], answerPosition = left;
             for (int right = left; right < blockSize; right++) {
-                int answer;
-                answer = full[left];
-                for (int i = left; i <= right; i++) {
-                    answer = std::min(answer, full[i]);
-                }
-                for (int i = left; i <= right; i++) {
-                    if (answer == full[i]) {
-                        blockAnswer(mask, left, right).second = i;
-                        break;
-                    }
+                if (answer > full[right]) {
+                    answer = full[right];
+                    answerPosition = right;
                 }
                 blockAnswer(mask, left, right).first = answer;
+                blockAnswer(mask, left, right).second = answerPosition;
             }
         }
     }
+    blockType.resize(blockCount);
     blockMinimum.resize(blockCount);
     for (int i = 0; i < blockCount; i++) {
-        blockMinimum[i] = blockAnswer(blockType[i], 0, blockSize - 1).first;
+        blockType[i] = calculateType(array.begin() + i * blockSize,
+                                     array.begin() + (i + 1) * blockSize);
+        blockMinimum[i] = array[i * blockSize]
+            + blockAnswer(blockType[i], 0, blockSize - 1).first;
     }
     table.setArray(blockMinimum);
+    assert(blockAnswerData.size() < array.size() + 10);
 }
 
 int RMQDelta1::calculateMinimumPosition(int leftBorder, int rightBorder) {
-    if (1) {
-        int value = array[leftBorder], position = leftBorder;
-        for (int i = leftBorder + 1; i < rightBorder; i++)
-            if (array[i] < value) {
-                value = array[i];
-                position = i;
-            }
-        return position;
-    }
     --rightBorder;
     int value = array[leftBorder], position = leftBorder;
     int leftBorderBlock = leftBorder / blockSize;
@@ -104,7 +92,7 @@ int RMQDelta1::calculateMinimumPosition(int leftBorder, int rightBorder) {
     if (leftBorderBlock + 1 < rightBorderBlock) {
         int block = table.calculateMinimumPosition(
             leftBorderBlock + 1, rightBorderBlock);
-        if (array[block * blockSize] + blockMinimum[block] < value) {
+        if (blockMinimum[block] < value) {
             value = blockMinimum[block];
             position = block * blockSize + blockAnswer(
                 blockType[block], 0, blockSize - 1).second;

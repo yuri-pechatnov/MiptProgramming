@@ -56,23 +56,23 @@ class Trie {
     int currentNodeNum;
     Vector<TrieNode*> idToNode;
     IntVector positionToId, positionToDepth,
-        enterTime, idToEvenSuffix, idToOddSuffix, suffixToId,
-        selfLCP;
+        enterTime, selfLCP;
     RMQDelta1 rmq;
     void eulerTourPrepare(TrieNode *root, int *position, int depth);
     void copySubtree(TrieNode *destination, TrieNode *source);
 
-    void deployLinearLCA();
-    int getLCAId(int firstNodeId, int secondNodeId);
-    int getLCP(int firstSuffix, int secondSuffix);
 
   public:
 
     TrieNode *root;
     const IntVector *stringPointer;
+    IntVector suffixToId;
 
     TrieNode *newTrieNode(TrieNode *parent, int distance, int suffix);
 
+    void deployLinearLCA();
+    int getLCAId(int firstNodeId, int secondNodeId);
+    int getLCP(int firstSuffix, int secondSuffix);
     void setSubtreeIds(TrieNode *root, int *currentId);
     void writeSubtreeSuffixArray(TrieNode *root, IntVector &suffixArray);
     void writeSuffixArray(IntVector &suffixArray);
@@ -92,9 +92,7 @@ class FarachSuffixTrie {
     typedef Vector <int> IntVector;
 
     IntVector string;
-    IntVector evenString;
-    IntVector categoryToPosition;
-    bool usedTerminalInEvenString;
+    IntVector evenString, evenSuffixArray;
     Trie evenTrie, oddTrie, badTrie, trie, goodTrie;
     // badTrie and trie have dangerous structure
     // and rely on evenTrie and oddTrie, don't touch them

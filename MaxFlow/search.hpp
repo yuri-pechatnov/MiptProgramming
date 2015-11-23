@@ -95,7 +95,8 @@ void BreadthFirstSearch<VertexProperty, EdgeProperty>::search(
             const RelevantEdgeDecider<VertexProperty, EdgeProperty>
                         &relevantEdgeDecider,
             const DistanceSetter<VertexProperty, EdgeProperty>
-                        &distanceSetter) {
+                &distanceSetter =
+                DistanceSetter<VertexProperty, EdgeProperty>()) {
     std::queue<Vertex*> q;
     std::vector<int> distance(graph.size(), -1);
     q.push(from);

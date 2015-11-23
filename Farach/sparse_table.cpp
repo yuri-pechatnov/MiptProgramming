@@ -5,7 +5,7 @@
 
 
 
-int SparseTable::extractDegree(register int value) {
+int SparseTable::extractDegree(int value) {
     register int answer = 0;
     if (value >= (1 << 16)) {
         answer += 16;
@@ -40,7 +40,7 @@ int SparseTable::calculateMinimumPosition(int leftBorder, int rightBorder) {
     }
 }
 
-void SparseTable::setArray(std::vector <int> array) {
+void SparseTable::setArray(const std::vector <int> &array) {
     assert(table[0] == NULL);
     int tableSize = array.size();
     for (levelsCount = 0; (1 << levelsCount) < tableSize; levelsCount++) {
@@ -51,7 +51,6 @@ void SparseTable::setArray(std::vector <int> array) {
     for (int i = 0; i < tableSize; i++) {
         tablePositions[0][i] = i;
     }
-
     for (int k = 1; k < levelsCount; k++) {
         for (int i = 0; i < tableSize; i++) {
             table[k][i] = table[k - 1][i];

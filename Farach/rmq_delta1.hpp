@@ -15,7 +15,7 @@ class RMQDelta1 {
     int blockSize, blockCount, typeCount;
     Vector<int> array, blockType, blockMinimum;
     Vector<Pair<int, int>> blockAnswerData;
-    Pair<int, int> &blockAnswer(int type, int left, int right);
+    inline Pair<int, int> &blockAnswer(int type, int left, int right);
     int calculateType(Vector<int>::iterator begin, Vector<int>::iterator end);
 
   public:

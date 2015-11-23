@@ -10,6 +10,7 @@
 using std::cerr;
 using std::endl;
 using std::setw;
+using std::swap;
 
 typedef KoAluruSuffixArray::IntVector IntVector;
 typedef KoAluruSuffixArray::IntVectorReference IntVectorReference;
@@ -23,16 +24,16 @@ namespace KoAluruSuffixArrayAssistantClasses {
 void KoAluruSuffixArray::swapSuffixes(int firstPosition, int secondPosition) {
     int &firstSuffix = positionToSuffix[firstPosition],
         &secondSuffix = positionToSuffix[secondPosition];
-    std::swap(suffixToPosition[firstSuffix], suffixToPosition[secondSuffix]);
-    std::swap(firstSuffix, secondSuffix);
+    swap(suffixToPosition[firstSuffix], suffixToPosition[secondSuffix]);
+    swap(firstSuffix, secondSuffix);
 }
 
 
 void KoAluruSuffixArray::swapLess(int firstLess, int secondLess) {
     int &firstSuffix = lessPositionToSuffix[firstLess],
         &secondSuffix = lessPositionToSuffix[secondLess];
-    std::swap(suffixToLessPosition[firstSuffix], suffixToLessPosition[secondSuffix]);
-    std::swap(firstSuffix, secondSuffix);
+    swap(suffixToLessPosition[firstSuffix], suffixToLessPosition[secondSuffix]);
+    swap(firstSuffix, secondSuffix);
 }
 
 
@@ -212,8 +213,8 @@ void KoAluruSuffixArray::calculateLessTypeDivision() {
             lessToBucket[current] = previousBucketIterator;
             int &firstLess = lesses[whereLesses[current]],
                 &secondLess = lesses[bucketIterator->leftBound];
-            std::swap(whereLesses[firstLess], whereLesses[secondLess]);
-            std::swap(firstLess, secondLess);
+            swap(whereLesses[firstLess], whereLesses[secondLess]);
+            swap(firstLess, secondLess);
             previousBucketIterator->rightBound++;
             bucketIterator->leftBound++;
         }

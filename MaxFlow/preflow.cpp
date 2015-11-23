@@ -123,7 +123,7 @@ void PreflowPushFlow::discharge(Vertex *v,
 
 void PreflowPushFlow::globalRelabel() {
     BreadthFirstSearch<VertexProperty, EdgeProperty> breadthFirstSearch;
-    breadthFirstSearch.searchStandartDistanceSetter(graph, sink,
+    breadthFirstSearch.search(graph, sink,
             PreflowPushSupportClasses::ReverseEdgeIsNotSaturated());
     for (PreflowPushGraph::VertexIterator vIterator = graph.vertexesBegin();
                 vIterator != graph.vertexesEnd(); vIterator++) {
