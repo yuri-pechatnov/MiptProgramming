@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1461275275 source:/home/ura/Programming/MIPT/PingPong/PingPong/main.cpp
+	<iostream>
+	<thread>
+	<atomic>
+
