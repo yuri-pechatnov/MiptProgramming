@@ -46,8 +46,6 @@ class TrieNode {
 };
 
 class Trie {
-    friend class FarachSuffixTrie;
-
     typedef Vector <int> IntVector;
 
     static const int outSpaceWidth = 4;
@@ -89,6 +87,8 @@ class Trie {
 
 
 class FarachSuffixTrie {
+    friend class Trie;
+
     typedef Vector <int> IntVector;
 
     IntVector string;

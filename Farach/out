@@ -1,0 +1,481 @@
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls  ms/call  ms/call  name    
+ 15.74      0.48     0.48      110     4.36     4.36  std::vector<TrieNode, std::allocator<TrieNode> >::_M_default_append(unsigned int)
+ 15.08      0.94     0.46       44    10.45    11.89  Trie::buildFromSuffixArrayAndLCP(std::vector<int, std::allocator<int> > const&, std::vector<int, std::allocator<int> > const&)
+ 11.15      1.28     0.34       44     7.73     8.09  FarachSuffixTrie::partialSuffixArrayToLCP(std::vector<int, std::allocator<int> > const&, std::vector<int, std::allocator<int> > const&, std::vector<int, std::allocator<int> >&)
+  9.51      1.57     0.29       22    13.18    13.18  void radixSort<__gnu_cxx::__normal_iterator<PairSymbol*, std::vector<PairSymbol, std::allocator<PairSymbol> > >, SymbolPairFieldGetter>(__gnu_cxx::__normal_iterator<PairSymbol*, std::vector<PairSymbol, std::allocator<PairSymbol> > >, __gnu_cxx::__normal_iterator<PairSymbol*, std::vector<PairSymbol, std::allocator<PairSymbol> > >, SymbolPairFieldGetter const&)
+  7.21      1.79     0.22       22    10.00    10.00  Trie::eulerTourPrepare(TrieNode*, int*, int)
+  4.59      1.93     0.14       22     6.36     6.72  void radixSort<__gnu_cxx::__normal_iterator<std::pair<int, int>*, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > >, PairIntFirstGetter>(__gnu_cxx::__normal_iterator<std::pair<int, int>*, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > >, __gnu_cxx::__normal_iterator<std::pair<int, int>*, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > >, PairIntFirstGetter const&)
+  4.59      2.07     0.14       22     6.36    12.54  FarachSuffixTrie::mergeSubtriesFinally(Trie&, Trie&, TrieNode*, TrieNode*, TrieNode*)
+  4.26      2.20     0.13       22     5.91     5.91  SparseTable::setArray(std::vector<int, std::allocator<int> > const&)
+  4.26      2.33     0.13       22     5.91     8.60  FarachSuffixTrie::mergeSubtriesRoughly(Trie&, TrieNode*, TrieNode*, TrieNode*)
+  2.62      2.41     0.08  1427995     0.00     0.00  void std::vector<TrieEdge, std::allocator<TrieEdge> >::_M_emplace_back_aux<TrieEdge const&>(TrieEdge const&)
+  2.30      2.48     0.07 14867534     0.00     0.00  Trie::newTrieNode(TrieNode*, int, int)
+  1.97      2.54     0.06      105     0.57     0.57  Trie::~Trie()
+  1.64      2.59     0.05 15418702     0.00     0.00  void std::vector<TrieEdge, std::allocator<TrieEdge> >::emplace_back<TrieEdge>(TrieEdge&&)
+  1.64      2.64     0.05      154     0.32     0.32  std::vector<int, std::allocator<int> >::_M_default_append(unsigned int)
+  1.64      2.69     0.05       22     2.27     5.53  Trie::copySubtree(TrieNode*, TrieNode*)
+  1.31      2.73     0.04  4165149     0.00     0.00  void std::vector<TrieEdge, std::allocator<TrieEdge> >::_M_emplace_back_aux<TrieEdge>(TrieEdge&&)
+  1.31      2.77     0.04   464139     0.00     0.00  Trie::getLCP(int, int)
+  1.31      2.81     0.04   464139     0.00     0.00  Trie::getLCAId(int, int)
+  1.31      2.85     0.04      111     0.36     0.36  std::vector<int, std::allocator<int> >::_M_fill_assign(unsigned int, int const&)
+  1.31      2.89     0.04       22     1.82    15.32  SymbolPairMatcher::generateMatch(std::vector<PairSymbol, std::allocator<PairSymbol> >&, std::vector<int, std::allocator<int> >&)
+  1.31      2.93     0.04       21     1.90     1.90  Trie::writeSubtreeSuffixArray(TrieNode*, std::vector<int, std::allocator<int> >&)
+  0.98      2.96     0.03       22     1.36    32.76  FarachSuffixTrie::buildOddSuffixTree()
+  0.66      2.98     0.02       22     0.91    30.07  FarachSuffixTrie::buildEvenTrie()
+  0.66      3.00     0.02       22     0.91     0.91  Trie::setSubtreeIds(TrieNode*, int*)
+  0.33      3.01     0.01  3000028     0.00     0.00  PairSymbol::PairSymbol(int, int)
+  0.33      3.02     0.01   464139     0.00     0.00  RMQDelta1::calculateMinimumPosition(int, int)
+  0.33      3.03     0.01      255     0.04     0.04  void std::vector<PairSymbol, std::allocator<PairSymbol> >::_M_emplace_back_aux<PairSymbol>(PairSymbol&&)
+  0.33      3.04     0.01       39     0.26     0.26  void std::vector<int, std::allocator<int> >::_M_emplace_back_aux<int>(int&&)
+  0.33      3.05     0.01       22     0.45    16.69  FarachSuffixTrie::buildEvenString()
+  0.00      3.05     0.00  3000028     0.00     0.00  void std::vector<PairSymbol, std::allocator<PairSymbol> >::emplace_back<PairSymbol>(PairSymbol&&)
+  0.00      3.05     0.00  1264013     0.00     0.00  RMQDelta1::calculateType(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, __gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >)
+  0.00      3.05     0.00      254     0.00     0.00  void std::vector<int, std::allocator<int> >::_M_emplace_back_aux<int const&>(int const&)
+  0.00      3.05     0.00      110     0.00     0.00  SparseTable::SparseTable()
+  0.00      3.05     0.00      110     0.00     4.36  Trie::setString(std::vector<int, std::allocator<int> > const&)
+  0.00      3.05     0.00      110     0.00     0.00  Trie::Trie()
+  0.00      3.05     0.00      110     0.00     0.00  RMQDelta1::RMQDelta1()
+  0.00      3.05     0.00      105     0.00     0.00  SparseTable::clear()
+  0.00      3.05     0.00      105     0.00     0.00  SparseTable::~SparseTable()
+  0.00      3.05     0.00       24     0.00     0.00  SparseTable::extractDegree(int)
+  0.00      3.05     0.00       22     0.00    16.91  FarachSuffixTrie::mergeTriesFinally()
+  0.00      3.05     0.00       22     0.00    12.96  FarachSuffixTrie::mergeTriesRoughly()
+  0.00      3.05     0.00       22     0.00    19.36  Trie::deployLinearLCA()
+  0.00      3.05     0.00       22     0.00     9.89  Trie::copyFrom(Trie&)
+  0.00      3.05     0.00       22     0.00     6.76  RMQDelta1::setArray(std::vector<int, std::allocator<int> > const&)
+  0.00      3.05     0.00       22     0.00     0.00  std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > >::_M_default_append(unsigned int)
+  0.00      3.05     0.00       22     0.00     0.00  std::vector<int, std::allocator<int> >::operator=(std::vector<int, std::allocator<int> > const&)
+  0.00      3.05     0.00       21     0.00   113.74  FarachSuffixTrie::calculate()
+  0.00      3.05     0.00       21     0.00     0.27  FarachSuffixTrie::setString(std::vector<int, std::allocator<int> > const&)
+  0.00      3.05     0.00       14     0.00     0.00  void std::vector<int, std::allocator<int> >::_M_insert_aux<int>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int&&)
+  0.00      3.05     0.00        2     0.00     0.00  SparseTable::calculateMinimumPosition(int, int)
+  0.00      3.05     0.00        1     0.00     0.00  _GLOBAL__sub_I__Z1fSs
+  0.00      3.05     0.00        1     0.00     0.00  _GLOBAL__sub_I__ZN8TrieEdgeC2EiP8TrieNode
+  0.00      3.05     0.00        1     0.00     0.00  _GLOBAL__sub_I__ZN9RMQDelta113calculateTypeEN9__gnu_cxx17__normal_iteratorIPiSt6vectorIiSaIiEEEES6_
+
+ %         the percentage of the total running time of the
+time       program used by this function.
+
+cumulative a running sum of the number of seconds accounted
+ seconds   for by this function and those listed above it.
+
+ self      the number of seconds accounted for by this
+seconds    function alone.  This is the major sort for this
+           listing.
+
+calls      the number of times this function was invoked, if
+           this function is profiled, else blank.
+ 
+ self      the average number of milliseconds spent in this
+ms/call    function per call, if this function is profiled,
+	   else blank.
+
+ total     the average number of milliseconds spent in this
+ms/call    function and its descendents per call, if this 
+	   function is profiled, else blank.
+
+name       the name of the function.  This is the minor sort
+           for this listing. The index shows the location of
+	   the function in the gprof listing. If the index is
+	   in parenthesis it shows where it would appear in
+	   the gprof listing if it were to be printed.
+
+Copyright (C) 2012 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+		     Call graph (explanation follows)
+
+
+granularity: each sample hit covers 4 byte(s) for 0.33% of 3.05 seconds
+
+index % time    self  children    called     name
+                                  21             FarachSuffixTrie::buildEvenTrie() <cycle 1> [4]
+[2]     78.3    0.00    2.39      21         FarachSuffixTrie::calculate() <cycle 1> [2]
+                0.03    0.69      22/22          FarachSuffixTrie::buildOddSuffixTree() [3]
+                0.00    0.43      22/22          Trie::deployLinearLCA() [8]
+                0.00    0.37      22/22          FarachSuffixTrie::mergeTriesFinally() [9]
+                0.01    0.36      22/22          FarachSuffixTrie::buildEvenString() [10]
+                0.00    0.29      22/22          FarachSuffixTrie::mergeTriesRoughly() [14]
+                0.00    0.22      22/22          Trie::copyFrom(Trie&) [17]
+                                  22             FarachSuffixTrie::buildEvenTrie() <cycle 1> [4]
+-----------------------------------------------
+                0.03    0.69      22/22          FarachSuffixTrie::calculate() <cycle 1> [2]
+[3]     23.6    0.03    0.69      22         FarachSuffixTrie::buildOddSuffixTree() [3]
+                0.23    0.03      22/44          Trie::buildFromSuffixArrayAndLCP(std::vector<int, std::allocator<int> > const&, std::vector<int, std::allocator<int> > const&) [5]
+                0.17    0.01      22/44          FarachSuffixTrie::partialSuffixArrayToLCP(std::vector<int, std::allocator<int> > const&, std::vector<int, std::allocator<int> > const&, std::vector<int, std::allocator<int> >&) [11]
+                0.14    0.01      22/22          void radixSort<__gnu_cxx::__normal_iterator<std::pair<int, int>*, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > >, PairIntFirstGetter>(__gnu_cxx::__normal_iterator<std::pair<int, int>*, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > >, __gnu_cxx::__normal_iterator<std::pair<int, int>*, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > >, PairIntFirstGetter const&) [20]
+                0.00    0.10      22/110         Trie::setString(std::vector<int, std::allocator<int> > const&) [6]
+                0.01    0.00      22/154         std::vector<int, std::allocator<int> >::_M_default_append(unsigned int) [29]
+                0.00    0.00      14/14          void std::vector<int, std::allocator<int> >::_M_insert_aux<int>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int&&) [57]
+-----------------------------------------------
+                                  22             FarachSuffixTrie::calculate() <cycle 1> [2]
+[4]     21.7    0.02    0.64      22         FarachSuffixTrie::buildEvenTrie() <cycle 1> [4]
+                0.23    0.03      22/44          Trie::buildFromSuffixArrayAndLCP(std::vector<int, std::allocator<int> > const&, std::vector<int, std::allocator<int> > const&) [5]
+                0.17    0.01      22/44          FarachSuffixTrie::partialSuffixArrayToLCP(std::vector<int, std::allocator<int> > const&, std::vector<int, std::allocator<int> > const&, std::vector<int, std::allocator<int> >&) [11]
+                0.00    0.10      22/110         Trie::setString(std::vector<int, std::allocator<int> > const&) [6]
+                0.06    0.00     105/105         Trie::~Trie() [26]
+                0.04    0.00      21/21          Trie::writeSubtreeSuffixArray(TrieNode*, std::vector<int, std::allocator<int> >&) [31]
+                0.00    0.01      21/21          FarachSuffixTrie::setString(std::vector<int, std::allocator<int> > const&) [38]
+                0.00    0.00       1/111         std::vector<int, std::allocator<int> >::_M_fill_assign(unsigned int, int const&) [32]
+                0.00    0.00     105/110         Trie::Trie() [50]
+                                  21             FarachSuffixTrie::calculate() <cycle 1> [2]
+-----------------------------------------------
+                0.23    0.03      22/44          FarachSuffixTrie::buildOddSuffixTree() [3]
+                0.23    0.03      22/44          FarachSuffixTrie::buildEvenTrie() <cycle 1> [4]
+[5]     17.2    0.46    0.06      44         Trie::buildFromSuffixArrayAndLCP(std::vector<int, std::allocator<int> > const&, std::vector<int, std::allocator<int> > const&) [5]
+                0.03    0.00 6541728/14867534     Trie::newTrieNode(TrieNode*, int, int) [25]
+                0.02    0.00 6541728/15418702     void std::vector<TrieEdge, std::allocator<TrieEdge> >::emplace_back<TrieEdge>(TrieEdge&&) [27]
+                0.01    0.00 1171296/4165149     void std::vector<TrieEdge, std::allocator<TrieEdge> >::_M_emplace_back_aux<TrieEdge>(TrieEdge&&) [30]
+-----------------------------------------------
+                0.00    0.10      22/110         Trie::copyFrom(Trie&) [17]
+                0.00    0.10      22/110         FarachSuffixTrie::mergeTriesRoughly() [14]
+                0.00    0.10      22/110         FarachSuffixTrie::mergeTriesFinally() [9]
+                0.00    0.10      22/110         FarachSuffixTrie::buildOddSuffixTree() [3]
+                0.00    0.10      22/110         FarachSuffixTrie::buildEvenTrie() <cycle 1> [4]
+[6]     15.7    0.00    0.48     110         Trie::setString(std::vector<int, std::allocator<int> > const&) [6]
+                0.48    0.00     110/110         std::vector<TrieNode, std::allocator<TrieNode> >::_M_default_append(unsigned int) [7]
+                0.00    0.00     110/14867534     Trie::newTrieNode(TrieNode*, int, int) [25]
+-----------------------------------------------
+                0.48    0.00     110/110         Trie::setString(std::vector<int, std::allocator<int> > const&) [6]
+[7]     15.7    0.48    0.00     110         std::vector<TrieNode, std::allocator<TrieNode> >::_M_default_append(unsigned int) [7]
+-----------------------------------------------
+                0.00    0.43      22/22          FarachSuffixTrie::calculate() <cycle 1> [2]
+[8]     14.0    0.00    0.43      22         Trie::deployLinearLCA() [8]
+                0.22    0.00      22/22          Trie::eulerTourPrepare(TrieNode*, int*, int) [16]
+                0.00    0.15      22/22          RMQDelta1::setArray(std::vector<int, std::allocator<int> > const&) [19]
+                0.02    0.00      66/154         std::vector<int, std::allocator<int> >::_M_default_append(unsigned int) [29]
+                0.02    0.00      22/22          Trie::setSubtreeIds(TrieNode*, int*) [33]
+                0.02    0.00      44/111         std::vector<int, std::allocator<int> >::_M_fill_assign(unsigned int, int const&) [32]
+-----------------------------------------------
+                0.00    0.37      22/22          FarachSuffixTrie::calculate() <cycle 1> [2]
+[9]     12.2    0.00    0.37      22         FarachSuffixTrie::mergeTriesFinally() [9]
+                0.14    0.14      22/22          FarachSuffixTrie::mergeSubtriesFinally(Trie&, Trie&, TrieNode*, TrieNode*, TrieNode*) [15]
+                0.00    0.10      22/110         Trie::setString(std::vector<int, std::allocator<int> > const&) [6]
+-----------------------------------------------
+                0.01    0.36      22/22          FarachSuffixTrie::calculate() <cycle 1> [2]
+[10]    12.0    0.01    0.36      22         FarachSuffixTrie::buildEvenString() [10]
+                0.04    0.30      22/22          SymbolPairMatcher::generateMatch(std::vector<PairSymbol, std::allocator<PairSymbol> >&, std::vector<int, std::allocator<int> >&) [12]
+                0.01    0.00 3000028/3000028     PairSymbol::PairSymbol(int, int) [34]
+                0.01    0.00     255/255         void std::vector<PairSymbol, std::allocator<PairSymbol> >::_M_emplace_back_aux<PairSymbol>(PairSymbol&&) [36]
+                0.00    0.00 3000028/3000028     void std::vector<PairSymbol, std::allocator<PairSymbol> >::emplace_back<PairSymbol>(PairSymbol&&) [46]
+-----------------------------------------------
+                0.17    0.01      22/44          FarachSuffixTrie::buildOddSuffixTree() [3]
+                0.17    0.01      22/44          FarachSuffixTrie::buildEvenTrie() <cycle 1> [4]
+[11]    11.7    0.34    0.02      44         FarachSuffixTrie::partialSuffixArrayToLCP(std::vector<int, std::allocator<int> > const&, std::vector<int, std::allocator<int> > const&, std::vector<int, std::allocator<int> >&) [11]
+                0.02    0.00      44/111         std::vector<int, std::allocator<int> >::_M_fill_assign(unsigned int, int const&) [32]
+-----------------------------------------------
+                0.04    0.30      22/22          FarachSuffixTrie::buildEvenString() [10]
+[12]    11.1    0.04    0.30      22         SymbolPairMatcher::generateMatch(std::vector<PairSymbol, std::allocator<PairSymbol> >&, std::vector<int, std::allocator<int> >&) [12]
+                0.29    0.00      22/22          void radixSort<__gnu_cxx::__normal_iterator<PairSymbol*, std::vector<PairSymbol, std::allocator<PairSymbol> > >, SymbolPairFieldGetter>(__gnu_cxx::__normal_iterator<PairSymbol*, std::vector<PairSymbol, std::allocator<PairSymbol> > >, __gnu_cxx::__normal_iterator<PairSymbol*, std::vector<PairSymbol, std::allocator<PairSymbol> > >, SymbolPairFieldGetter const&) [13]
+                0.01    0.00      22/154         std::vector<int, std::allocator<int> >::_M_default_append(unsigned int) [29]
+-----------------------------------------------
+                0.29    0.00      22/22          SymbolPairMatcher::generateMatch(std::vector<PairSymbol, std::allocator<PairSymbol> >&, std::vector<int, std::allocator<int> >&) [12]
+[13]     9.5    0.29    0.00      22         void radixSort<__gnu_cxx::__normal_iterator<PairSymbol*, std::vector<PairSymbol, std::allocator<PairSymbol> > >, SymbolPairFieldGetter>(__gnu_cxx::__normal_iterator<PairSymbol*, std::vector<PairSymbol, std::allocator<PairSymbol> > >, __gnu_cxx::__normal_iterator<PairSymbol*, std::vector<PairSymbol, std::allocator<PairSymbol> > >, SymbolPairFieldGetter const&) [13]
+-----------------------------------------------
+                0.00    0.29      22/22          FarachSuffixTrie::calculate() <cycle 1> [2]
+[14]     9.3    0.00    0.29      22         FarachSuffixTrie::mergeTriesRoughly() [14]
+                0.13    0.06      22/22          FarachSuffixTrie::mergeSubtriesRoughly(Trie&, TrieNode*, TrieNode*, TrieNode*) [18]
+                0.00    0.10      22/110         Trie::setString(std::vector<int, std::allocator<int> > const&) [6]
+-----------------------------------------------
+                              188500             FarachSuffixTrie::mergeSubtriesFinally(Trie&, Trie&, TrieNode*, TrieNode*, TrieNode*) [15]
+                0.14    0.14      22/22          FarachSuffixTrie::mergeTriesFinally() [9]
+[15]     9.0    0.14    0.14      22+188500  FarachSuffixTrie::mergeSubtriesFinally(Trie&, Trie&, TrieNode*, TrieNode*, TrieNode*) [15]
+                0.04    0.05  464139/464139      Trie::getLCP(int, int) [23]
+                0.03    0.00  576178/1427995     void std::vector<TrieEdge, std::allocator<TrieEdge> >::_M_emplace_back_aux<TrieEdge const&>(TrieEdge const&) [24]
+                0.01    0.00  715588/4165149     void std::vector<TrieEdge, std::allocator<TrieEdge> >::_M_emplace_back_aux<TrieEdge>(TrieEdge&&) [30]
+                0.00    0.00 1179721/15418702     void std::vector<TrieEdge, std::allocator<TrieEdge> >::emplace_back<TrieEdge>(TrieEdge&&) [27]
+                0.00    0.00  628443/14867534     Trie::newTrieNode(TrieNode*, int, int) [25]
+                              188500             FarachSuffixTrie::mergeSubtriesFinally(Trie&, Trie&, TrieNode*, TrieNode*, TrieNode*) [15]
+-----------------------------------------------
+                             6517532             Trie::eulerTourPrepare(TrieNode*, int*, int) [16]
+                0.22    0.00      22/22          Trie::deployLinearLCA() [8]
+[16]     7.2    0.22    0.00      22+6517532 Trie::eulerTourPrepare(TrieNode*, int*, int) [16]
+                             6517532             Trie::eulerTourPrepare(TrieNode*, int*, int) [16]
+-----------------------------------------------
+                0.00    0.22      22/22          FarachSuffixTrie::calculate() <cycle 1> [2]
+[17]     7.1    0.00    0.22      22         Trie::copyFrom(Trie&) [17]
+                0.05    0.07      22/22          Trie::copySubtree(TrieNode*, TrieNode*) [22]
+                0.00    0.10      22/110         Trie::setString(std::vector<int, std::allocator<int> > const&) [6]
+-----------------------------------------------
+                              464139             FarachSuffixTrie::mergeSubtriesRoughly(Trie&, TrieNode*, TrieNode*, TrieNode*) [18]
+                0.13    0.06      22/22          FarachSuffixTrie::mergeTriesRoughly() [14]
+[18]     6.2    0.13    0.06      22+464139  FarachSuffixTrie::mergeSubtriesRoughly(Trie&, TrieNode*, TrieNode*, TrieNode*) [18]
+                0.05    0.00  851817/1427995     void std::vector<TrieEdge, std::allocator<TrieEdge> >::_M_emplace_back_aux<TrieEdge const&>(TrieEdge const&) [24]
+                0.00    0.00  904082/14867534     Trie::newTrieNode(TrieNode*, int, int) [25]
+                0.00    0.00  439949/4165149     void std::vector<TrieEdge, std::allocator<TrieEdge> >::_M_emplace_back_aux<TrieEdge>(TrieEdge&&) [30]
+                0.00    0.00  904082/15418702     void std::vector<TrieEdge, std::allocator<TrieEdge> >::emplace_back<TrieEdge>(TrieEdge&&) [27]
+                              464139             FarachSuffixTrie::mergeSubtriesRoughly(Trie&, TrieNode*, TrieNode*, TrieNode*) [18]
+-----------------------------------------------
+                0.00    0.15      22/22          Trie::deployLinearLCA() [8]
+[19]     4.9    0.00    0.15      22         RMQDelta1::setArray(std::vector<int, std::allocator<int> > const&) [19]
+                0.13    0.00      22/22          SparseTable::setArray(std::vector<int, std::allocator<int> > const&) [21]
+                0.01    0.00      44/154         std::vector<int, std::allocator<int> >::_M_default_append(unsigned int) [29]
+                0.00    0.00      17/39          void std::vector<int, std::allocator<int> >::_M_emplace_back_aux<int>(int&&) [37]
+                0.00    0.00 1264013/1264013     RMQDelta1::calculateType(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, __gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >) [47]
+                0.00    0.00      22/22          std::vector<int, std::allocator<int> >::operator=(std::vector<int, std::allocator<int> > const&) [56]
+                0.00    0.00      22/24          SparseTable::extractDegree(int) [54]
+                0.00    0.00      22/22          std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > >::_M_default_append(unsigned int) [55]
+-----------------------------------------------
+                0.14    0.01      22/22          FarachSuffixTrie::buildOddSuffixTree() [3]
+[20]     4.9    0.14    0.01      22         void radixSort<__gnu_cxx::__normal_iterator<std::pair<int, int>*, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > >, PairIntFirstGetter>(__gnu_cxx::__normal_iterator<std::pair<int, int>*, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > >, __gnu_cxx::__normal_iterator<std::pair<int, int>*, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > >, PairIntFirstGetter const&) [20]
+                0.01    0.00      22/111         std::vector<int, std::allocator<int> >::_M_fill_assign(unsigned int, int const&) [32]
+-----------------------------------------------
+                0.13    0.00      22/22          RMQDelta1::setArray(std::vector<int, std::allocator<int> > const&) [19]
+[21]     4.3    0.13    0.00      22         SparseTable::setArray(std::vector<int, std::allocator<int> > const&) [21]
+-----------------------------------------------
+                             6793171             Trie::copySubtree(TrieNode*, TrieNode*) [22]
+                0.05    0.07      22/22          Trie::copyFrom(Trie&) [17]
+[22]     4.0    0.05    0.07      22+6793171 Trie::copySubtree(TrieNode*, TrieNode*) [22]
+                0.03    0.00 6793171/14867534     Trie::newTrieNode(TrieNode*, int, int) [25]
+                0.02    0.00 6793171/15418702     void std::vector<TrieEdge, std::allocator<TrieEdge> >::emplace_back<TrieEdge>(TrieEdge&&) [27]
+                0.02    0.00 1838316/4165149     void std::vector<TrieEdge, std::allocator<TrieEdge> >::_M_emplace_back_aux<TrieEdge>(TrieEdge&&) [30]
+                             6793171             Trie::copySubtree(TrieNode*, TrieNode*) [22]
+-----------------------------------------------
+                              464139             Trie::getLCP(int, int) [23]
+                0.04    0.05  464139/464139      FarachSuffixTrie::mergeSubtriesFinally(Trie&, Trie&, TrieNode*, TrieNode*, TrieNode*) [15]
+[23]     3.0    0.04    0.05  464139+464139  Trie::getLCP(int, int) [23]
+                0.04    0.01  464139/464139      Trie::getLCAId(int, int) [28]
+                              464139             Trie::getLCP(int, int) [23]
+-----------------------------------------------
+                0.03    0.00  576178/1427995     FarachSuffixTrie::mergeSubtriesFinally(Trie&, Trie&, TrieNode*, TrieNode*, TrieNode*) [15]
+                0.05    0.00  851817/1427995     FarachSuffixTrie::mergeSubtriesRoughly(Trie&, TrieNode*, TrieNode*, TrieNode*) [18]
+[24]     2.6    0.08    0.00 1427995         void std::vector<TrieEdge, std::allocator<TrieEdge> >::_M_emplace_back_aux<TrieEdge const&>(TrieEdge const&) [24]
+-----------------------------------------------
+                0.00    0.00     110/14867534     Trie::setString(std::vector<int, std::allocator<int> > const&) [6]
+                0.00    0.00  628443/14867534     FarachSuffixTrie::mergeSubtriesFinally(Trie&, Trie&, TrieNode*, TrieNode*, TrieNode*) [15]
+                0.00    0.00  904082/14867534     FarachSuffixTrie::mergeSubtriesRoughly(Trie&, TrieNode*, TrieNode*, TrieNode*) [18]
+                0.03    0.00 6541728/14867534     Trie::buildFromSuffixArrayAndLCP(std::vector<int, std::allocator<int> > const&, std::vector<int, std::allocator<int> > const&) [5]
+                0.03    0.00 6793171/14867534     Trie::copySubtree(TrieNode*, TrieNode*) [22]
+[25]     2.3    0.07    0.00 14867534         Trie::newTrieNode(TrieNode*, int, int) [25]
+-----------------------------------------------
+                0.06    0.00     105/105         FarachSuffixTrie::buildEvenTrie() <cycle 1> [4]
+[26]     2.0    0.06    0.00     105         Trie::~Trie() [26]
+                0.00    0.00     105/105         SparseTable::clear() [52]
+                0.00    0.00     105/105         SparseTable::~SparseTable() [53]
+-----------------------------------------------
+                0.00    0.00  904082/15418702     FarachSuffixTrie::mergeSubtriesRoughly(Trie&, TrieNode*, TrieNode*, TrieNode*) [18]
+                0.00    0.00 1179721/15418702     FarachSuffixTrie::mergeSubtriesFinally(Trie&, Trie&, TrieNode*, TrieNode*, TrieNode*) [15]
+                0.02    0.00 6541728/15418702     Trie::buildFromSuffixArrayAndLCP(std::vector<int, std::allocator<int> > const&, std::vector<int, std::allocator<int> > const&) [5]
+                0.02    0.00 6793171/15418702     Trie::copySubtree(TrieNode*, TrieNode*) [22]
+[27]     1.6    0.05    0.00 15418702         void std::vector<TrieEdge, std::allocator<TrieEdge> >::emplace_back<TrieEdge>(TrieEdge&&) [27]
+-----------------------------------------------
+                0.04    0.01  464139/464139      Trie::getLCP(int, int) [23]
+[28]     1.6    0.04    0.01  464139         Trie::getLCAId(int, int) [28]
+                0.01    0.00  464139/464139      RMQDelta1::calculateMinimumPosition(int, int) [35]
+-----------------------------------------------
+                0.01    0.00      22/154         SymbolPairMatcher::generateMatch(std::vector<PairSymbol, std::allocator<PairSymbol> >&, std::vector<int, std::allocator<int> >&) [12]
+                0.01    0.00      22/154         FarachSuffixTrie::buildOddSuffixTree() [3]
+                0.01    0.00      44/154         RMQDelta1::setArray(std::vector<int, std::allocator<int> > const&) [19]
+                0.02    0.00      66/154         Trie::deployLinearLCA() [8]
+[29]     1.6    0.05    0.00     154         std::vector<int, std::allocator<int> >::_M_default_append(unsigned int) [29]
+-----------------------------------------------
+                0.00    0.00  439949/4165149     FarachSuffixTrie::mergeSubtriesRoughly(Trie&, TrieNode*, TrieNode*, TrieNode*) [18]
+                0.01    0.00  715588/4165149     FarachSuffixTrie::mergeSubtriesFinally(Trie&, Trie&, TrieNode*, TrieNode*, TrieNode*) [15]
+                0.01    0.00 1171296/4165149     Trie::buildFromSuffixArrayAndLCP(std::vector<int, std::allocator<int> > const&, std::vector<int, std::allocator<int> > const&) [5]
+                0.02    0.00 1838316/4165149     Trie::copySubtree(TrieNode*, TrieNode*) [22]
+[30]     1.3    0.04    0.00 4165149         void std::vector<TrieEdge, std::allocator<TrieEdge> >::_M_emplace_back_aux<TrieEdge>(TrieEdge&&) [30]
+-----------------------------------------------
+                             3000047             Trie::writeSubtreeSuffixArray(TrieNode*, std::vector<int, std::allocator<int> >&) [31]
+                0.04    0.00      21/21          FarachSuffixTrie::buildEvenTrie() <cycle 1> [4]
+[31]     1.3    0.04    0.00      21+3000047 Trie::writeSubtreeSuffixArray(TrieNode*, std::vector<int, std::allocator<int> >&) [31]
+                0.00    0.00     254/254         void std::vector<int, std::allocator<int> >::_M_emplace_back_aux<int const&>(int const&) [48]
+                             3000047             Trie::writeSubtreeSuffixArray(TrieNode*, std::vector<int, std::allocator<int> >&) [31]
+-----------------------------------------------
+                0.00    0.00       1/111         FarachSuffixTrie::buildEvenTrie() <cycle 1> [4]
+                0.01    0.00      22/111         void radixSort<__gnu_cxx::__normal_iterator<std::pair<int, int>*, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > >, PairIntFirstGetter>(__gnu_cxx::__normal_iterator<std::pair<int, int>*, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > >, __gnu_cxx::__normal_iterator<std::pair<int, int>*, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > >, PairIntFirstGetter const&) [20]
+                0.02    0.00      44/111         FarachSuffixTrie::partialSuffixArrayToLCP(std::vector<int, std::allocator<int> > const&, std::vector<int, std::allocator<int> > const&, std::vector<int, std::allocator<int> >&) [11]
+                0.02    0.00      44/111         Trie::deployLinearLCA() [8]
+[32]     1.3    0.04    0.00     111         std::vector<int, std::allocator<int> >::_M_fill_assign(unsigned int, int const&) [32]
+-----------------------------------------------
+                             6517532             Trie::setSubtreeIds(TrieNode*, int*) [33]
+                0.02    0.00      22/22          Trie::deployLinearLCA() [8]
+[33]     0.7    0.02    0.00      22+6517532 Trie::setSubtreeIds(TrieNode*, int*) [33]
+                             6517532             Trie::setSubtreeIds(TrieNode*, int*) [33]
+-----------------------------------------------
+                0.01    0.00 3000028/3000028     FarachSuffixTrie::buildEvenString() [10]
+[34]     0.3    0.01    0.00 3000028         PairSymbol::PairSymbol(int, int) [34]
+-----------------------------------------------
+                0.01    0.00  464139/464139      Trie::getLCAId(int, int) [28]
+[35]     0.3    0.01    0.00  464139         RMQDelta1::calculateMinimumPosition(int, int) [35]
+                0.00    0.00       2/2           SparseTable::calculateMinimumPosition(int, int) [58]
+-----------------------------------------------
+                0.01    0.00     255/255         FarachSuffixTrie::buildEvenString() [10]
+[36]     0.3    0.01    0.00     255         void std::vector<PairSymbol, std::allocator<PairSymbol> >::_M_emplace_back_aux<PairSymbol>(PairSymbol&&) [36]
+-----------------------------------------------
+                0.00    0.00      17/39          RMQDelta1::setArray(std::vector<int, std::allocator<int> > const&) [19]
+                0.01    0.00      22/39          FarachSuffixTrie::setString(std::vector<int, std::allocator<int> > const&) [38]
+[37]     0.3    0.01    0.00      39         void std::vector<int, std::allocator<int> >::_M_emplace_back_aux<int>(int&&) [37]
+-----------------------------------------------
+                0.00    0.01      21/21          FarachSuffixTrie::buildEvenTrie() <cycle 1> [4]
+[38]     0.2    0.00    0.01      21         FarachSuffixTrie::setString(std::vector<int, std::allocator<int> > const&) [38]
+                0.01    0.00      22/39          void std::vector<int, std::allocator<int> >::_M_emplace_back_aux<int>(int&&) [37]
+-----------------------------------------------
+                0.00    0.00 3000028/3000028     FarachSuffixTrie::buildEvenString() [10]
+[46]     0.0    0.00    0.00 3000028         void std::vector<PairSymbol, std::allocator<PairSymbol> >::emplace_back<PairSymbol>(PairSymbol&&) [46]
+-----------------------------------------------
+                0.00    0.00 1264013/1264013     RMQDelta1::setArray(std::vector<int, std::allocator<int> > const&) [19]
+[47]     0.0    0.00    0.00 1264013         RMQDelta1::calculateType(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, __gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >) [47]
+-----------------------------------------------
+                0.00    0.00     254/254         Trie::writeSubtreeSuffixArray(TrieNode*, std::vector<int, std::allocator<int> >&) [31]
+[48]     0.0    0.00    0.00     254         void std::vector<int, std::allocator<int> >::_M_emplace_back_aux<int const&>(int const&) [48]
+-----------------------------------------------
+                0.00    0.00     110/110         RMQDelta1::RMQDelta1() [51]
+[49]     0.0    0.00    0.00     110         SparseTable::SparseTable() [49]
+-----------------------------------------------
+                0.00    0.00       5/110         FarachSuffixTrie::FarachSuffixTrie() [67]
+                0.00    0.00     105/110         FarachSuffixTrie::buildEvenTrie() <cycle 1> [4]
+[50]     0.0    0.00    0.00     110         Trie::Trie() [50]
+                0.00    0.00     110/110         RMQDelta1::RMQDelta1() [51]
+-----------------------------------------------
+                0.00    0.00     110/110         Trie::Trie() [50]
+[51]     0.0    0.00    0.00     110         RMQDelta1::RMQDelta1() [51]
+                0.00    0.00     110/110         SparseTable::SparseTable() [49]
+-----------------------------------------------
+                0.00    0.00     105/105         Trie::~Trie() [26]
+[52]     0.0    0.00    0.00     105         SparseTable::clear() [52]
+-----------------------------------------------
+                0.00    0.00     105/105         Trie::~Trie() [26]
+[53]     0.0    0.00    0.00     105         SparseTable::~SparseTable() [53]
+-----------------------------------------------
+                0.00    0.00       2/24          SparseTable::calculateMinimumPosition(int, int) [58]
+                0.00    0.00      22/24          RMQDelta1::setArray(std::vector<int, std::allocator<int> > const&) [19]
+[54]     0.0    0.00    0.00      24         SparseTable::extractDegree(int) [54]
+-----------------------------------------------
+                0.00    0.00      22/22          RMQDelta1::setArray(std::vector<int, std::allocator<int> > const&) [19]
+[55]     0.0    0.00    0.00      22         std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > >::_M_default_append(unsigned int) [55]
+-----------------------------------------------
+                0.00    0.00      22/22          RMQDelta1::setArray(std::vector<int, std::allocator<int> > const&) [19]
+[56]     0.0    0.00    0.00      22         std::vector<int, std::allocator<int> >::operator=(std::vector<int, std::allocator<int> > const&) [56]
+-----------------------------------------------
+                0.00    0.00      14/14          FarachSuffixTrie::buildOddSuffixTree() [3]
+[57]     0.0    0.00    0.00      14         void std::vector<int, std::allocator<int> >::_M_insert_aux<int>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int&&) [57]
+-----------------------------------------------
+                0.00    0.00       2/2           RMQDelta1::calculateMinimumPosition(int, int) [35]
+[58]     0.0    0.00    0.00       2         SparseTable::calculateMinimumPosition(int, int) [58]
+                0.00    0.00       2/24          SparseTable::extractDegree(int) [54]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [84]
+[59]     0.0    0.00    0.00       1         _GLOBAL__sub_I__Z1fSs [59]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [84]
+[60]     0.0    0.00    0.00       1         _GLOBAL__sub_I__ZN8TrieEdgeC2EiP8TrieNode [60]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [84]
+[61]     0.0    0.00    0.00       1         _GLOBAL__sub_I__ZN9RMQDelta113calculateTypeEN9__gnu_cxx17__normal_iteratorIPiSt6vectorIiSaIiEEEES6_ [61]
+-----------------------------------------------
+
+ This table describes the call tree of the program, and was sorted by
+ the total amount of time spent in each function and its children.
+
+ Each entry in this table consists of several lines.  The line with the
+ index number at the left hand margin lists the current function.
+ The lines above it list the functions that called this function,
+ and the lines below it list the functions this one called.
+ This line lists:
+     index	A unique number given to each element of the table.
+		Index numbers are sorted numerically.
+		The index number is printed next to every function name so
+		it is easier to look up where the function is in the table.
+
+     % time	This is the percentage of the `total' time that was spent
+		in this function and its children.  Note that due to
+		different viewpoints, functions excluded by options, etc,
+		these numbers will NOT add up to 100%.
+
+     self	This is the total amount of time spent in this function.
+
+     children	This is the total amount of time propagated into this
+		function by its children.
+
+     called	This is the number of times the function was called.
+		If the function called itself recursively, the number
+		only includes non-recursive calls, and is followed by
+		a `+' and the number of recursive calls.
+
+     name	The name of the current function.  The index number is
+		printed after it.  If the function is a member of a
+		cycle, the cycle number is printed between the
+		function's name and the index number.
+
+
+ For the function's parents, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the function into this parent.
+
+     children	This is the amount of time that was propagated from
+		the function's children into this parent.
+
+     called	This is the number of times this parent called the
+		function `/' the total number of times the function
+		was called.  Recursive calls to the function are not
+		included in the number after the `/'.
+
+     name	This is the name of the parent.  The parent's index
+		number is printed after it.  If the parent is a
+		member of a cycle, the cycle number is printed between
+		the name and the index number.
+
+ If the parents of the function cannot be determined, the word
+ `<spontaneous>' is printed in the `name' field, and all the other
+ fields are blank.
+
+ For the function's children, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the child into the function.
+
+     children	This is the amount of time that was propagated from the
+		child's children to the function.
+
+     called	This is the number of times the function called
+		this child `/' the total number of times the child
+		was called.  Recursive calls by the child are not
+		listed in the number after the `/'.
+
+     name	This is the name of the child.  The child's index
+		number is printed after it.  If the child is a
+		member of a cycle, the cycle number is printed
+		between the name and the index number.
+
+ If there are any cycles (circles) in the call graph, there is an
+ entry for the cycle-as-a-whole.  This entry shows who called the
+ cycle (as parents) and the members of the cycle (as children.)
+ The `+' recursive calls entry shows the number of function calls that
+ were internal to the cycle, and the calls entry for each member shows,
+ for that member, how many times it was called from other members of
+ the cycle.
+
+Copyright (C) 2012 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+Index by function name
+
+  [59] _GLOBAL__sub_I__Z1fSs  [18] FarachSuffixTrie::mergeSubtriesRoughly(Trie&, TrieNode*, TrieNode*, TrieNode*) [47] RMQDelta1::calculateType(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, __gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >)
+  [60] _GLOBAL__sub_I__ZN8TrieEdgeC2EiP8TrieNode [11] FarachSuffixTrie::partialSuffixArrayToLCP(std::vector<int, std::allocator<int> > const&, std::vector<int, std::allocator<int> > const&, std::vector<int, std::allocator<int> >&) [35] RMQDelta1::calculateMinimumPosition(int, int)
+  [61] _GLOBAL__sub_I__ZN9RMQDelta113calculateTypeEN9__gnu_cxx17__normal_iteratorIPiSt6vectorIiSaIiEEEES6_ [2] FarachSuffixTrie::calculate() [19] RMQDelta1::setArray(std::vector<int, std::allocator<int> > const&)
+  [13] void radixSort<__gnu_cxx::__normal_iterator<PairSymbol*, std::vector<PairSymbol, std::allocator<PairSymbol> > >, SymbolPairFieldGetter>(__gnu_cxx::__normal_iterator<PairSymbol*, std::vector<PairSymbol, std::allocator<PairSymbol> > >, __gnu_cxx::__normal_iterator<PairSymbol*, std::vector<PairSymbol, std::allocator<PairSymbol> > >, SymbolPairFieldGetter const&) [38] FarachSuffixTrie::setString(std::vector<int, std::allocator<int> > const&) [51] RMQDelta1::RMQDelta1()
+  [20] void radixSort<__gnu_cxx::__normal_iterator<std::pair<int, int>*, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > >, PairIntFirstGetter>(__gnu_cxx::__normal_iterator<std::pair<int, int>*, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > >, __gnu_cxx::__normal_iterator<std::pair<int, int>*, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > >, PairIntFirstGetter const&) [12] SymbolPairMatcher::generateMatch(std::vector<PairSymbol, std::allocator<PairSymbol> >&, std::vector<int, std::allocator<int> >&) [46] void std::vector<PairSymbol, std::allocator<PairSymbol> >::emplace_back<PairSymbol>(PairSymbol&&)
+  [34] PairSymbol::PairSymbol(int, int) [22] Trie::copySubtree(TrieNode*, TrieNode*) [36] void std::vector<PairSymbol, std::allocator<PairSymbol> >::_M_emplace_back_aux<PairSymbol>(PairSymbol&&)
+  [54] SparseTable::extractDegree(int) [25] Trie::newTrieNode(TrieNode*, int, int) [27] void std::vector<TrieEdge, std::allocator<TrieEdge> >::emplace_back<TrieEdge>(TrieEdge&&)
+  [58] SparseTable::calculateMinimumPosition(int, int) [33] Trie::setSubtreeIds(TrieNode*, int*) [24] void std::vector<TrieEdge, std::allocator<TrieEdge> >::_M_emplace_back_aux<TrieEdge const&>(TrieEdge const&)
+  [52] SparseTable::clear()    [8] Trie::deployLinearLCA() [30] void std::vector<TrieEdge, std::allocator<TrieEdge> >::_M_emplace_back_aux<TrieEdge>(TrieEdge&&)
+  [21] SparseTable::setArray(std::vector<int, std::allocator<int> > const&) [16] Trie::eulerTourPrepare(TrieNode*, int*, int) [7] std::vector<TrieNode, std::allocator<TrieNode> >::_M_default_append(unsigned int)
+  [49] SparseTable::SparseTable() [31] Trie::writeSubtreeSuffixArray(TrieNode*, std::vector<int, std::allocator<int> >&) [55] std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > >::_M_default_append(unsigned int)
+  [53] SparseTable::~SparseTable() [5] Trie::buildFromSuffixArrayAndLCP(std::vector<int, std::allocator<int> > const&, std::vector<int, std::allocator<int> > const&) [57] void std::vector<int, std::allocator<int> >::_M_insert_aux<int>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int&&)
+   [4] FarachSuffixTrie::buildEvenTrie() [23] Trie::getLCP(int, int) [32] std::vector<int, std::allocator<int> >::_M_fill_assign(unsigned int, int const&)
+  [10] FarachSuffixTrie::buildEvenString() [17] Trie::copyFrom(Trie&) [29] std::vector<int, std::allocator<int> >::_M_default_append(unsigned int)
+   [9] FarachSuffixTrie::mergeTriesFinally() [28] Trie::getLCAId(int, int) [48] void std::vector<int, std::allocator<int> >::_M_emplace_back_aux<int const&>(int const&)
+  [14] FarachSuffixTrie::mergeTriesRoughly() [6] Trie::setString(std::vector<int, std::allocator<int> > const&) [37] void std::vector<int, std::allocator<int> >::_M_emplace_back_aux<int>(int&&)
+   [3] FarachSuffixTrie::buildOddSuffixTree() [50] Trie::Trie() [56] std::vector<int, std::allocator<int> >::operator=(std::vector<int, std::allocator<int> > const&)
+  [15] FarachSuffixTrie::mergeSubtriesFinally(Trie&, Trie&, TrieNode*, TrieNode*, TrieNode*) [26] Trie::~Trie() (1) <cycle 1>

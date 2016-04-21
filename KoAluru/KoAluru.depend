@@ -1,0 +1,19 @@
+# depslib dependency file v1.0
+1448028441 source:/home/ura/Programming/MIPT/KoAluru/koaluru.cpp
+	"koaluru.hpp"
+	<algorithm>
+	<iostream>
+	<iomanip>
+	<cassert>
+
+1447674887 /home/ura/Programming/MIPT/KoAluru/koaluru.hpp
+	<vector>
+	<list>
+
+1448028503 source:/home/ura/Programming/MIPT/KoAluru/main.cpp
+	<iostream>
+	<cstdio>
+	<string>
+	<algorithm>
+	"koaluru.hpp"
+

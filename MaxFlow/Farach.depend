@@ -1,0 +1,44 @@
+# depslib dependency file v1.0
+1447598735 source:/home/ura/Programming/MIPT/MaxFlow/dinic.cpp
+	<queue>
+	<climits>
+	<cassert>
+	"dinic.hpp"
+	"search.hpp"
+
+1447598735 /home/ura/Programming/MIPT/MaxFlow/dinic.hpp
+	"graph.hpp"
+	"search.hpp"
+	"flow.hpp"
+
+1447598735 /home/ura/Programming/MIPT/MaxFlow/graph.hpp
+	<vector>
+	<queue>
+	<stdint.h>
+	<stdlib.h>
+	<stdio.h>
+
+1448031936 /home/ura/Programming/MIPT/MaxFlow/search.hpp
+	"graph.hpp"
+
+1447598735 /home/ura/Programming/MIPT/MaxFlow/flow.hpp
+	<vector>
+
+1447598735 source:/home/ura/Programming/MIPT/MaxFlow/main.cpp
+	<iostream>
+	<cstdio>
+	"dinic.hpp"
+	"preflow.hpp"
+
+1447598735 /home/ura/Programming/MIPT/MaxFlow/preflow.hpp
+	<queue>
+	"graph.hpp"
+	"flow.hpp"
+	"search.hpp"
+
+1448030912 source:/home/ura/Programming/MIPT/MaxFlow/preflow.cpp
+	<queue>
+	<climits>
+	<cassert>
+	"preflow.hpp"
+

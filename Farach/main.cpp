@@ -16,7 +16,7 @@ int pos;
 FarachSuffixTrie farach;
 vector <int> s, arr, lcp;
 
-class MyClass {
+class Comparator {
   public:
     bool operator()(int i, int j) {
         int lcp = farach.getTrie().getLCP(i, j);
@@ -24,7 +24,7 @@ class MyClass {
             return i > j;
         return s[i + lcp] < s[j + lcp];
     }
-    MyClass() {}
+    Comparator() {}
 };
 
 
@@ -112,7 +112,7 @@ int main()
             for (int i = 0; i < n; i++)
                 q[i] = i + pos;
             //copy(s.begin() + pos, s.begin() + pos + n, q.begin());
-            sort(q.begin(), q.end(), MyClass());
+            sort(q.begin(), q.end(), Comparator());
             for (int j = 0; j + 1 < n; j++) {
                 current += min(n + pos - max(q[j], q[j + 1]), farach.getTrie().getLCP(
                     q[j], q[j + 1]));

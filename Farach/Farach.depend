@@ -1,0 +1,64 @@
+# depslib dependency file v1.0
+1448276320 source:/home/ura/Programming/MIPT/Farach/farach.cpp
+	<iostream>
+	<iomanip>
+	<cassert>
+	"symbol_pair_matcher.hpp"
+	"rmq_delta1.hpp"
+	"farach.hpp"
+	"radix_sort.hpp"
+
+1448282044 source:/home/ura/Programming/MIPT/Farach/main.cpp
+	<iostream>
+	<fstream>
+	<algorithm>
+	<set>
+	<cassert>
+	"farach.hpp"
+
+1448277217 source:/home/ura/Programming/MIPT/Farach/sparse_table.cpp
+	"sparse_table.hpp"
+	<algorithm>
+	<cassert>
+
+1448277076 /home/ura/Programming/MIPT/Farach/sparse_table.hpp
+	<vector>
+
+1448189710 /home/ura/Programming/MIPT/Farach/radix_sort.hpp
+	<vector>
+	<algorithm>
+
+1448629636 /home/ura/Programming/MIPT/Farach/farach.hpp
+	<vector>
+	<iostream>
+	<iomanip>
+	"rmq_delta1.hpp"
+
+1447942083 /home/ura/Programming/MIPT/Farach/symbol_pair_matcher.hpp
+	<vector>
+
+1447942001 source:/home/ura/Programming/MIPT/Farach/symbol_pair_matcher.cpp
+	"symbol_pair_matcher.hpp"
+	"radix_sort.hpp"
+
+1448199530 source:/home/ura/Programming/MIPT/Farach/koaluru.cpp
+	"koaluru.hpp"
+	<algorithm>
+	<iostream>
+	<iomanip>
+	<cassert>
+
+1447674887 /home/ura/Programming/MIPT/Farach/koaluru.hpp
+	<vector>
+	<list>
+
+1448272887 /home/ura/Programming/MIPT/Farach/rmq_delta1.hpp
+	<vector>
+	"sparse_table.hpp"
+
+1448276721 source:/home/ura/Programming/MIPT/Farach/rmq_delta1.cpp
+	"rmq_delta1.hpp"
+	"sparse_table.hpp"
+	<cassert>
+	<iostream>
+
