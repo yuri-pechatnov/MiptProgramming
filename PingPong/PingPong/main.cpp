@@ -1,6 +1,7 @@
 #include <iostream>
 #include <thread>
 #include <atomic>
+#include <vector>
 
 using namespace std;
 
@@ -29,13 +30,31 @@ double estimate(int pos1, int pos2) {
 }
 
 
-int main()
-{
-    while (true) {
+
+
+template <typename T>
+double estimate2(int pos1, int pos2) {
+    T a[1000];
+    std::chrono::time_point<std::chrono::system_clock> start, end;
+    start = std::chrono::system_clock::now();
+    thread thr([&a, pos2]() {
+        for (int i = 0; i < 1e7; i++)
+            a[pos2].exchange(1);
+    });
+    for (int i = 0; i < 1e7; i++)
+        a[pos1].exchange(0);
+    thr.join();
+    end = std::chrono::system_clock::now();
+    return std::chrono::duration_cast<std::chrono::milliseconds>
+                             (end-start).count();
+}
+
+
+void testPingPong() {
+   while (true) {
         cout << "Ping pong: " << estimate(0, 1) << endl;
         cout << "Optimal:   " << estimate(0, 8) << endl;
     }
-
     /*
         time 10000 vs 1500
         (Ping-Pong vs usual)
@@ -63,7 +82,32 @@ int main()
         L2 cache:              256K
         L3 cache:              3072K
     */
-     return 0;
+}
 
+struct Levelled : public atomic<int> {
+    int t[16];
+};
+
+
+struct Intersective {
+    int t: 4*31;
+    std::atomic<int> a;
+    int r: 4*31;
+    void exchange(int t) {
+        a.exchange(t);
+    }
+};
+
+
+
+int main()
+{
+   while (true) {
+        cout << "Usual (one cache line): " << estimate2<atomic<int> >(0, 1) << endl;
+        cout << "Usual (two cache line): " << estimate2<atomic<int> >(0, 16) << endl;
+        cout << "Levelled:   " << estimate2<Levelled>(0, 1) << endl;
+        cout << "Intersective:   " << estimate2<Intersective>(0, 1) << endl;
+    }
+    return 0;
 }
 
