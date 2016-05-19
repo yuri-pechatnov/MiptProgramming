@@ -42,7 +42,7 @@ double estimate(int pos1, int pos2) {
 
 
 
-
+// Создает указанные атомики и щелкает их двумя потоками в перемешку
 template <typename T>
 double estimate2(int pos1, int pos2) {
     T a[1000];

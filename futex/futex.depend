@@ -1,0 +1,34 @@
+# depslib dependency file v1.0
+1463676651 source:/home/ura/Programming/Parallels/futex/main.cpp
+	<iostream>
+	<thread>
+	<mutex>
+	<vector>
+	<ctime>
+	<chrono>
+	<ratio>
+	<cmath>
+	<cassert>
+	"futex.h"
+	"SyncQueue.h"
+
+1461310617 source:/home/ura/Programming/Parallels/futex/futex.cpp
+	"futex.h"
+
+1461310050 /home/ura/Programming/Parallels/futex/futex.h
+	<thread>
+	<exception>
+	<atomic>
+
+1458243314 source:/home/ura/Programming/Parallels/futex/SyncQueue.cpp
+	"SyncQueue.h"
+
+1463676637 /home/ura/Programming/Parallels/futex/SyncQueue.h
+	<deque>
+	<mutex>
+	<condition_variable>
+	"futex.h"
+	"SyncQueue.cpp"
+
+1463676481 /home/ura/Programming/Parallels/futex/SyncQueue.cpp
+
