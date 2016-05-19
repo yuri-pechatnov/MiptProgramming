@@ -5,6 +5,17 @@
 
 using namespace std;
 
+char data[(int)1e6];
+char *dt = data;
+
+// Переопределеяем выделение памяти, чтобы никто умный не мешал (в частности не мешал попадать на границу кэш-линий)
+void* operator new(size_t n) {
+    dt += n + rand() % 3;
+    return dt - n;
+}
+
+void operator delete(void*) {
+}
 
 std::atomic<int> a[100000];
 
@@ -102,12 +113,20 @@ struct Intersective {
 
 int main()
 {
-   while (true) {
+   for (int i = 0; i < 3; i++) {
+        // задача 4.2 и 4.3.3
         cout << "Usual (one cache line): " << estimate2<atomic<int> >(0, 1) << endl;
         cout << "Usual (two cache line): " << estimate2<atomic<int> >(0, 16) << endl;
+        // Выровненные и невыровненные переменные 4.3.1
         cout << "Levelled:   " << estimate2<Levelled>(0, 1) << endl;
         cout << "Intersective:   " << estimate2<Intersective>(0, 1) << endl;
     }
+    // Попытаемся пересечь атомиком кэшлинию 4.3.2
+    // несколько должны выбиваться
+    for (int i = 0; i < 200; i++) {
+        cout << "Try to be in two cache-lines:   " << estimate2<atomic<long long> >(i, i) << endl;
+    }
+    // Действительно видно что случаются выбросы
     return 0;
 }
 
